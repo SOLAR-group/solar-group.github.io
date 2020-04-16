@@ -4,8 +4,8 @@
 .img-logo {
    vertical-align: middle;
    height: 100px;
-   float: left;
-   padding: 10px;
+  /* float: left;
+   padding: 10px; */
 }
 .h1-title {
    display: inline;
