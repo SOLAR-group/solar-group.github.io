@@ -1,6 +1,9 @@
-
-
+.container {
+   overflow: auto;
+}
 img {
-vertical-align: middle;
-height: 100px; 
+   float: left;
+}
+h1 {
+   display: inline;
 }
