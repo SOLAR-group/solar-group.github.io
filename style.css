@@ -1,10 +1,10 @@
 .container {
    overflow: auto;
-   align-items:center;
 }
 .img-logo {
    height: 100px;
    float: left;
+   vertical-align:middle
 }
 .h1-title {
    display: inline;
