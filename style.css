@@ -2,6 +2,7 @@
    overflow: auto;
 }
 img {
+   height: 100px;
    float: left;
 }
 h1 {
