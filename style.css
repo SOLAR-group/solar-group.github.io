@@ -1,5 +1,6 @@
 .container {
-   overflow: auto;
+   /* overflow: auto;*/
+   vertical-align:middle
 }
 .img-logo {
    height: 100px;
