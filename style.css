@@ -4,9 +4,9 @@
 .img-logo {
    height: 100px;
    float: left;
-   padding-right: 3px;
+   padding: 10px;
 }
 .h1-title {
    display: inline;
-   vertical-align:middle;
+   vertical-align: middle;
 }
