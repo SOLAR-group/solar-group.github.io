@@ -1926,8 +1926,9 @@ input, select, textarea {
 		}
 
 		#logo-img {
-			height: 150px;
+			height: 200px;
 			width: auto;
+			margin-bottom: 1em;
 		}
 
 		#logo-join-img {
@@ -2135,6 +2136,13 @@ input, select, textarea {
 		#features ul.actions {
 			margin-top: 1.25em;
 		}
+		#features h2 {
+			letter-spacing: 0.05em;
+		}
+		#features h2 strong {
+			color: #0087A2;
+		}
+
 
 /* Banner */
 
