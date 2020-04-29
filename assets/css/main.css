@@ -250,6 +250,15 @@ input, select, textarea {
 		box-sizing: border-box;
 		align-items: stretch;
 	}
+	.row > .members-title {
+		margin-bottom: -2em;
+		text-align: left;
+	}
+
+	.row > .members-title h2 {
+		letter-spacing: initial;
+		color: #0087A2;
+	}
 
 		.row > * {
 			box-sizing: border-box;
@@ -311,6 +320,9 @@ input, select, textarea {
 		.row > .off-2 {
 			margin-left: 16.66667%;
 		}
+		.row > .off-2-right {
+			margin-right: 16.66667%;
+		}
 
 		.row > .col-3 {
 			width: 25%;
@@ -326,6 +338,10 @@ input, select, textarea {
 
 		.row > .off-4 {
 			margin-left: 33.33333%;
+		}
+		
+		.row > .off-4-right {
+			margin-right: 33.33333%;
 		}
 
 		.row > .col-5 {
@@ -351,7 +367,9 @@ input, select, textarea {
 		.row > .off-7 {
 			margin-left: 58.33333%;
 		}
-
+		.row > .off-7-right {
+			margin-right: 58.33333%;
+		}
 		.row > .col-8 {
 			width: 66.66667%;
 		}
@@ -359,6 +377,10 @@ input, select, textarea {
 		.row > .off-8 {
 			margin-left: 66.66667%;
 		}
+
+		.row > .off-8-right {
+			margin-right: 66.66667%;
+		}		
 
 		.row > .col-9 {
 			width: 75%;
@@ -374,6 +396,10 @@ input, select, textarea {
 
 		.row > .off-10 {
 			margin-left: 83.33333%;
+		}
+
+		.row > .off-10-right {
+			margin-right: 83.33333%;
 		}
 
 		.row > .col-11 {
@@ -1920,9 +1946,16 @@ input, select, textarea {
 	}
 
 		#header > .container {
-			padding: 14em 0 7em 0;
+			padding: 10em 0 4em 0;
 			border-bottom: solid 2px #e5e5e5;
 			box-shadow: inset 0px -8px 0px 0px #fff, inset 0px -10px 0px 0px #e5e5e5;
+		}
+
+		#header > .container-noline {
+			padding: 4em 0 4em 0;
+			
+			/* border-bottom: solid 1px #e5e5e5; */
+			/* box-shadow: inset 0px -8px 0px 0px #fff, inset 0px -10px 0px 0px #e5e5e5; */
 		}
 
 		#logo-img {
@@ -1931,12 +1964,38 @@ input, select, textarea {
 			margin-bottom: 1em;
 		}
 
+		.o-logo-main {
+			height: 200px;
+			width: auto;
+			margin-bottom: 1em;
+			 margin-left: -1em;
+			 margin-right: -1em;
+			-webkit-animation:spin 10s linear infinite;
+			-moz-animation:spin 10s linear infinite;
+			animation:spin 10s linear infinite; 
+		}
+
+		 #o-logo {
+			height: 200px;
+			width: auto;
+			margin-bottom: 1em;
+			 margin-left: -0.5em;
+			 margin-right: -0.5em;
+			-webkit-animation:spin 10s linear infinite;
+			-moz-animation:spin 10s linear infinite;
+			animation:spin 10s linear infinite; 
+		}
+		@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+		@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+		@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+		
+
 		#logo-join-img {
 			height: 250px;
 			width: auto;
-			-webkit-animation:spin 10s linear infinite;
+		/*	-webkit-animation:spin 10s linear infinite;
     		-moz-animation:spin 10s linear infinite;
-   			 animation:spin 10s linear infinite;
+   			 animation:spin 10s linear infinite; */
 		}
 		@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 		@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
@@ -1968,20 +2027,49 @@ input, select, textarea {
 		#header p {
 			/* text-transform: uppercase; */
 			font-weight: 400;
-			color: #888;
-			margin: 2.5em 0 0 0;
-			font-size: 0.85em;
+			color: #0087A2;
+			margin: 0 0 0 0;
+			font-size: 1.2em;
 			/*letter-spacing: 3px; */
 			text-align: center;
 		}
 
 /* Nav */
 
+	#logo-sec {
+		position: absolute;
+		top: 1.8em;
+		left: 0;
+		width: 20%;
+		cursor: default;
+	} 
+	#logo-sec > a > span > .s-logo {
+		width: 14%;
+	} 
+	#logo-sec > a > span > .lar-logo {
+		width: 41%;
+	} 
+
+	#logo-sec > a > span > .o-logo {
+		width: 45%;
+		margin-left: -0.5em;
+		margin-right: -0.28em;
+		-webkit-animation:spin 10s linear infinite;
+		-moz-animation:spin 10s linear infinite;
+		animation:spin 10s linear infinite; 
+	}
+
+	#logo-sec > a > span > .o-logo-still {
+		width: 45%;
+		margin-left: -0.5em;
+		margin-right: -0.28em;
+	}
+
 	#nav {
 		position: absolute;
 		top: 3em;
-		left: 0;
-		width: 100%;
+		left: 15%;
+		width: 70%;
 		cursor: default;
 	}
 
@@ -2126,7 +2214,7 @@ input, select, textarea {
 		overflow: hidden;
 		background: #fff;
 		text-align: center;
-		padding: 6em 0;
+		padding: 0 0;
 	}
 
 		#features p {
@@ -2136,11 +2224,14 @@ input, select, textarea {
 		#features ul.actions {
 			margin-top: 1.25em;
 		}
-		#features h2 {
-			letter-spacing: 0.05em;
+		#features h2.title {
+			/*font-family: DejaVu Sans Mono, monospace;*/
+			font-size: 2.5em;
+			margin-top: -0.8em;
+			letter-spacing: 0.0em;
 		}
-		#features h2 strong {
-			color: #0087A2;
+		#features h2.title strong {
+			color: #f06e18;
 		}
 
 
@@ -2255,7 +2346,7 @@ input, select, textarea {
 		overflow: hidden;
 		border-top: solid 2px #e5e5e5;
 		background: #f0f0f0;
-		padding: 6em 0 8em 0;
+		padding: 4em 0 0 0;
 	}
 
 		#footer form input[type="text"],
@@ -2288,8 +2379,8 @@ input, select, textarea {
 	#copyright {
 		border-top: solid 2px #e5e5e5;
 		text-align: center;
-		margin-top: 6em;
-		padding-top: 4em;
+		margin-top: 4em;
+		padding-top: 2em;
 	}
 
 /* XLarge */
@@ -2331,7 +2422,7 @@ input, select, textarea {
 		/* Header */
 
 			#header > .container {
-				padding: 12em 0 5em 0;
+				padding: 8em 0 5em 0;
 			}
 
 			#header h1 {

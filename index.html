@@ -10,8 +10,9 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+
 	</head>
-	<body class="homepage is-preload">
+	<body class="homepage is-preload"  onload = "startTimer()">
 		<div id="page-wrapper">
 
 			<!-- Header -->
@@ -19,15 +20,21 @@
 					<div class="container">
 						<!-- Logo -->
 							<!-- <h1 id="logo"><a href="index.html">Strongly Typed</a></h1> -->
-							<div> <img id="logo-img" src="images/solar-logo.png" alt="" /> </div>
+							<!-- <div> <img id="logo-img" src="images/solar-logo.png" alt="" /> </div> -->
+							<div><img id="logo-img" class="s-logo" src="images/s-logo.png"> <img id="thisImg" class="o-logo-main" src="images/orig-logo.png" alt="img"> <img id="logo-img" class="lar-logo" src="images/lar-logo.png"> </div>
 							<h2><strong>Software Optimisation, Learning and Analytics Research</strong>  </h2>
 							<h3>SOLAR is a group of researchers working on software engineering problems at the interface of software optimisation, machine/evolutionary learning and analytics. <br> 
 								The group is led by <a href="http://www0.cs.ucl.ac.uk/staff/F.Sarro/"><u>Dr Federica Sarro</u></a>  at University College London (UCL) and currently consists of 10 members.  </h3>
 
+					<!--	<logo-sec id = "logo-sec"> 
+							<img class="s-logo" src="images/s-logo.png"> <img id = "thisImg" class="o-logo" src="images/orig-logo.png" alt="img"> <img class="lar-logo" src="images/lar-logo.png"> 
+
+						</logo-sec> -->
+
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
-									<li><a class="icon solid fa-home" href="index.html"><span>SOLAR</span></a></li>
+								<!-- 	<li><a class="icon solid fa-home" href="index.html"><span>SOLAR</span></a></li> -->
 									<li>
 										<a href="#" class="icon fa-chart-bar"><span>Projects</span></a>
 										<ul>
@@ -442,6 +449,8 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/switch.js"></script>
+
 
 	</body>
 </html>
