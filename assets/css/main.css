@@ -2663,6 +2663,23 @@ input, select, textarea {
 
 	@media screen and (max-width: 980px) {
 
+		#logo-sec {
+			top: 4em;
+			margin-left: 40%;
+			width: 20%;
+			cursor: default;
+		} 
+
+		#logo-sec > a > span > .o-logo {	
+			top: 0px;
+			width: 70px;
+			margin-left: -0.5em;
+			margin-right: -0.28em;
+			-webkit-animation:spin 10s linear infinite;
+			-moz-animation:spin 10s linear infinite;
+			animation:spin 10s linear infinite; 
+		}
+
 		/* Basic */
 
 			html, body {
@@ -2868,6 +2885,16 @@ input, select, textarea {
 	}
 
 	@media screen and (max-width: 752px) {
+		#logo-sec > a > span > .o-logo {	
+			width: 60px;
+			margin-top: 1em;
+			margin-left: -0.5em;
+			margin-right: -0.28em;
+			-webkit-animation:spin 10s linear infinite;
+			-moz-animation:spin 10s linear infinite;
+			animation:spin 10s linear infinite; 
+		}
+
 		#s-logo-img {
 			height: 100px;
 			width: auto;
@@ -2894,6 +2921,16 @@ input, select, textarea {
 /* Small */
 
 	@media screen and (max-width: 736px) {
+
+		#logo-sec > a > span > .o-logo {	
+			width: 60px;
+			margin-top: 1em;
+			margin-left: -0.5em;
+			margin-right: -0.28em;
+			-webkit-animation:spin 10s linear infinite;
+			-moz-animation:spin 10s linear infinite;
+			animation:spin 10s linear infinite; 
+		}
 
 		#s-logo-img {
 			height: 75px;
