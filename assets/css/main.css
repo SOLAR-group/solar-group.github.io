@@ -521,6 +521,23 @@ input, select, textarea {
 
 		@media screen and (max-width: 1680px) {
 
+			#logo-img {
+				height: 200px;
+				width: auto;
+				margin-bottom: 1em;
+			}
+	
+			.o-logo-main {
+				height: 200px;
+				width: auto;
+				margin-bottom: 1em;
+				 margin-left: -1em;
+				 margin-right: -1em;
+				-webkit-animation:spin 10s linear infinite;
+				-moz-animation:spin 10s linear infinite;
+				animation:spin 10s linear infinite; 
+			}
+
 			.row {
 				display: flex;
 				flex-wrap: wrap;
@@ -765,6 +782,23 @@ input, select, textarea {
 		}
 
 		@media screen and (max-width: 1280px) {
+
+			#logo-img {
+				height: 200px;
+				width: auto;
+				margin-bottom: 1em;
+			}
+	
+			.o-logo-main {
+				height: 200px;
+				width: auto;
+				margin-bottom: 1em;
+				 margin-left: -1em;
+				 margin-right: -1em;
+				-webkit-animation:spin 10s linear infinite;
+				-moz-animation:spin 10s linear infinite;
+				animation:spin 10s linear infinite; 
+			}
 
 			.row {
 				display: flex;
@@ -1011,6 +1045,23 @@ input, select, textarea {
 
 		@media screen and (max-width: 980px) {
 
+			#logo-img {
+				height: 200px;
+				width: auto;
+				margin-bottom: 1em;
+			}
+	
+			.o-logo-main {
+				height: 200px;
+				width: auto;
+				margin-bottom: 1em;
+				 margin-left: -1em;
+				 margin-right: -1em;
+				-webkit-animation:spin 10s linear infinite;
+				-moz-animation:spin 10s linear infinite;
+				animation:spin 10s linear infinite; 
+			}
+
 			.row {
 				display: flex;
 				flex-wrap: wrap;
@@ -1252,6 +1303,25 @@ input, select, textarea {
 							padding-top: 100px;
 						}
 
+		}
+
+		@media screen and (max-width: 752px) {
+			#logo-img {
+				height: 200px;
+				width: auto;
+				margin-bottom: 1em;
+			}
+	
+			.o-logo-main {
+				height: 200px;
+				width: auto;
+				margin-bottom: 1em;
+				 margin-left: -1em;
+				 margin-right: -1em;
+				-webkit-animation:spin 10s linear infinite;
+				-moz-animation:spin 10s linear infinite;
+				animation:spin 10s linear infinite; 
+			}
 		}
 
 		@media screen and (max-width: 736px) {
@@ -2020,7 +2090,13 @@ input, select, textarea {
 			color: #878787;
 		}
 
-		#logo-img {
+		#s-logo-img {
+			height: 200px;
+			width: auto;
+			margin-bottom: 1em;
+		}
+
+		#lar-logo-img {
 			height: 200px;
 			width: auto;
 			margin-bottom: 1em;
@@ -2791,6 +2867,30 @@ input, select, textarea {
 
 	}
 
+	@media screen and (max-width: 752px) {
+		#s-logo-img {
+			height: 100px;
+			width: auto;
+			margin-bottom: 1em;
+		}
+
+		#lar-logo-img {
+			height: 100px;
+			width: auto;
+			margin-bottom: 1em;
+		}
+
+		.o-logo-main {
+			height: 100px;
+			width: auto;
+			margin-bottom: 1em;
+			 margin-left: -0.5em;
+			 margin-right: -0.5em;
+			-webkit-animation:spin 10s linear infinite;
+			-moz-animation:spin 10s linear infinite;
+			animation:spin 10s linear infinite; 
+		}
+	}
 /* Small */
 
 	@media screen and (max-width: 736px) {
