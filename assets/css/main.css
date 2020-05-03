@@ -2604,6 +2604,12 @@ input, select, textarea {
 				padding: 8em 0 5em 0;
 			}
 
+			#header > .container-noline {
+				padding: 8em 0 2em 0;
+				/* border-bottom: solid 2px #e5e5e5; 
+				box-shadow: inset 0px -8px 0px 0px #fff, inset 0px -10px 0px 0px #e5e5e5; */
+			}
+
 			#header h1 {
 				font-size: 2.5em;
 			}
@@ -2673,6 +2679,7 @@ input, select, textarea {
 		#logo-sec > a > span > .o-logo {	
 			top: 0px;
 			width: 70px;
+			margin-top: -2.5em;
 			margin-left: -0.5em;
 			margin-right: -0.28em;
 			-webkit-animation:spin 10s linear infinite;
@@ -2690,6 +2697,12 @@ input, select, textarea {
 
 			#header > .container {
 				padding: 10em 0 7em 0;
+			}
+
+			#header > .container-noline {
+				padding: 6em 0 2em 0;
+				/* border-bottom: solid 2px #e5e5e5; 
+				box-shadow: inset 0px -8px 0px 0px #fff, inset 0px -10px 0px 0px #e5e5e5; */
 			}
 
 		/* Nav */
@@ -2887,7 +2900,7 @@ input, select, textarea {
 	@media screen and (max-width: 752px) {
 		#logo-sec > a > span > .o-logo {	
 			width: 60px;
-			margin-top: 1em;
+			margin-top: -1.5em;
 			margin-left: -0.5em;
 			margin-right: -0.28em;
 			-webkit-animation:spin 10s linear infinite;
@@ -2924,7 +2937,7 @@ input, select, textarea {
 
 		#logo-sec > a > span > .o-logo {	
 			width: 60px;
-			margin-top: 1em;
+			margin-top: -1.5em;
 			margin-left: -0.5em;
 			margin-right: -0.28em;
 			-webkit-animation:spin 10s linear infinite;
@@ -3020,6 +3033,12 @@ input, select, textarea {
 
 			#header > .container {
 				padding: 6em 0 4em 0;
+			}
+
+			#header > .container-noline {
+				padding: 6em 0 2em 0;
+				/* border-bottom: solid 2px #e5e5e5; 
+				box-shadow: inset 0px -8px 0px 0px #fff, inset 0px -10px 0px 0px #e5e5e5; */
 			}
 
 			#header h1 {
