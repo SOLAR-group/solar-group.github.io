@@ -2895,6 +2895,29 @@ input, select, textarea {
 
 	@media screen and (max-width: 736px) {
 
+		#s-logo-img {
+			height: 75px;
+			width: auto;
+			margin-bottom: 1em;
+		}
+
+		#lar-logo-img {
+			height: 75px;
+			width: auto;
+			margin-bottom: 1em;
+		}
+
+		.o-logo-main {
+			height: 75px;
+			width: auto;
+			margin-bottom: 1em;
+			 margin-left: -0.5em;
+			 margin-right: -0.5em;
+			-webkit-animation:spin 10s linear infinite;
+			-moz-animation:spin 10s linear infinite;
+			animation:spin 10s linear infinite; 
+		}
+
 		/* Basic */
 
 			body, input, textarea, select {
