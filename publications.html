@@ -377,8 +377,6 @@ form#quicksearch {
 	border-color: gray; 
 	padding: 0.7em 0.5em; 
 	}
-
-2
 	
 span#searchstat {
 	padding-left: 3em;
@@ -387,7 +385,8 @@ span#searchstat {
 }
 
 form#quicksearch .clear-button {
-	margin-left: 15em;
+	width: 100%;
+	/* margin-left: 15em; */
 }
 
 div#settings { margin-top:0.7em; /* border-bottom: 1px transparent solid; background-color: #efefef; border: 1px grey solid; */ }
@@ -442,7 +441,7 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 
     
   	<section id="header">
-		<div class="container">
+		<div class="container-noline">
 
 			<!-- Logo -->
 		   <!--	<div> <img id="logo-join-img" src="images/join-us-logo.png" alt="" /> </div> -->
@@ -494,13 +493,13 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
  <section id="features">
 	<div class="container">
 	<form action="" id="quicksearch"> 
-		<div class = "row">
+		<div class = "row aln-center">
 			<div class = "col-4"> 
 <input class = "search-input" type="text" id="qs_field" autocomplete="off" placeholder="Type to search..." /> </div>
 
-<div class = "col-4"> 
+<div class = "col-4 off-1-right"> 
      <span id="searchstat"> Matching entries: <span id="stat">0</span></span> </div>
-	 <div class = "col-4"> 	
+	 <div class = "col-3"> 	
 		<input class = "clear-button" type="button" onclick="clearQS()" value="clear" /></div>
 <!-- <div id="showsettings" onclick="toggleSettings()">settings...</div> -->
 <div id="settings" class="hidden">
@@ -597,6 +596,27 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 	  }
 </pre></td>
 </tr> 
+
+<tr id="di2020assessing" class="entry">
+	<td>Sergio Di Martino, Filomena Ferrucci, Carmine Gravino, Federica Sarro</td>
+	<td>Assessing the Effectiveness of Approximate Functional Sizing Approaches for Effort Estimation<p class="infolinks">[<a href="javascript:toggleInfo('keynote15','bibtex')">BibTeX</a>]</p></td>
+	<td>2020</td>
+	<td>Journal of Information and Software Technology (IST)&nbsp;</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_di2020assessing" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@article{di2020assessing,
+		title={Assessing the Effectiveness of Approximate Functional Sizing Approaches for Effort Estimation},
+		author={Di Martino, Sergio and Ferrucci, Filomena and Gravino, Carmine and Sarro, Federica},
+		journal={Information and Software Technology},
+		pages={106308},
+		year={2020},
+		publisher={Elsevier}
+	  }
+</pre></td>
+</tr>
 
 <tr id="sarro2019search" class="entry">
 	<td>F. Sarro</td>
@@ -740,26 +760,6 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 }
 </pre></td>
 </tr> -->
-<tr id="di2020assessing" class="entry">
-	<td>Sergio Di Martino, Filomena Ferrucci, Carmine Gravino, Federica Sarro</td>
-	<td>Assessing the Effectiveness of Approximate Functional Sizing Approaches for Effort Estimation<p class="infolinks">[<a href="javascript:toggleInfo('keynote15','bibtex')">BibTeX</a>]</p></td>
-	<td>2020</td>
-	<td>Journal of Information and Software Technology (IST)&nbsp;</td>
-	<td>&nbsp;</td>
-</tr>
-<tr id="bib_di2020assessing" class="bibtex noshow">
-<td colspan="6"><b>BibTeX</b>:
-<pre>
-	@article{di2020assessing,
-		title={Assessing the Effectiveness of Approximate Functional Sizing Approaches for Effort Estimation},
-		author={Di Martino, Sergio and Ferrucci, Filomena and Gravino, Carmine and Sarro, Federica},
-		journal={Information and Software Technology},
-		pages={106308},
-		year={2020},
-		publisher={Elsevier}
-	  }
-</pre></td>
-</tr>
 
 </tbody>
 </table>
