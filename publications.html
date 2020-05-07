@@ -419,9 +419,9 @@ td a { color: #f06e18; text-decoration: none; }
 td a:hover  { text-decoration: underline; }
 
 tr.noshow { display: none;}
-tr.highlight td { background-color: #EFEFEF; border-top: 2px #2E2E2E solid; font-weight: bold; }
-tr.abstract td, tr.review td, tr.bibtex td { background-color: #EFEFEF; text-align: justify; border-bottom: 2px #2E2E2E solid; }
-tr.nextshow td { border-bottom: 1px gray solid; }
+tr.highlight td { background-color: #EFEFEF; border: 2px #878787 solid; font-weight: bold; }
+tr.abstract td, tr.review td, tr.bibtex td { background-color: #EFEFEF; text-align: justify; border: solid 2px #878787 !important; }
+tr.nextshow td { border: solid 3px #878787 !important; }
 
 tr.bibtex pre { width: 100%; overflow: auto; white-space: pre-wrap;}
 p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
@@ -516,14 +516,14 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
  
 
 <table id="qs_table" border="1">
-<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="5%">DOI/URL</th></tr></thead>
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th></tr></thead>
 <tbody>
 	<tr id="hort20" class="entry">
 	<td>M. Hort, F.Sarro</td>
 	<td>Optimising Word Embeddings With Search-Based Approaches <p class="infolinks">[<a href="javascript:toggleInfo('hort20','bibtex')">BibTeX</a>]</p></td>
 	<td>2020</td>
 	<td>Genetic and Evolutionary Computation Conference Companion (GECCO’20 Companion)</td>
-	<td>&nbsp;</td>
+	<!--<td>&nbsp;</td> -->
 </tr>
 <!-- <tr id="bib_hort20" class="bibtex noshow">
 <td colspan="6"><b>BibTeX</b>:
@@ -545,7 +545,7 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 	<td>A New Approach to Distribute MOEA Pareto Front Computation <p class="infolinks">[<a href="javascript:toggleInfo('sarro20','bibtex')">BibTeX</a>]</p></td>
 	<td>2020</td>
 	<td>Genetic and Evolutionary Computation Conference Companion (GECCO’20 Companion)</td>
-	<td>&nbsp;</td>
+	<!--<td>&nbsp;</td> -->
 </tr>
 <!-- <tr id="bib_abdullah14" class="bibtex noshow">
 <td colspan="6"><b>BibTeX</b>:
@@ -559,50 +559,13 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 }
 </pre></td>
 </tr> -->
-<tr id="zhang2019machine" class="entry">
-	<td>Jie M. Zhang, Mark Harman, Lei Ma, Yang Liu</td>
-	<td>Machine Learning Testing: Survey, Landscapes and Horizons<p class="infolinks">[<a href="javascript:toggleInfo('zhang2019machine','bibtex')">BibTeX</a>]</p></td>
-	<td>2020</td>
-	<td>IEEE Transactions on Software Engineering</td>
-	<td><a href="https://arxiv.org/abs/1906.10742">URL</a>&nbsp;</td>
-</tr>
-<tr id="bib_zhang2019machine" class="bibtex noshow">
-<td colspan="6"><b>BibTeX</b>:
-<pre>
-	@article{zhang2019machine,
-		title={Machine learning testing: Survey, landscapes and horizons},
-		author={Zhang, Jie M and Harman, Mark and Ma, Lei and Liu, Yang},
-		journal={arXiv preprint arXiv:1906.10742},
-		year={2019}
-	  }
-</pre></td>
-</tr> 
-
-<tr id="sun2019automatic" class="entry">
-	<td>Jie M. Zhang, Zeyu Sun, Mark Harman, Mike Papadakis, Lu Zhang</td>
-	<td>Automatic Testing and Improvement of Machine Translation<p class="infolinks">[<a href="javascript:toggleInfo('sun2019automatic','bibtex')">BibTeX</a>]</p></td>
-	<td>2020</td>
-	<td>42nd International Conference on Software Engineering (ICSE 2020)</td>
-	<td><a href="https://arxiv.org/abs/1910.02688">URL</a>&nbsp;</td>
-</tr>
-<tr id="bib_sun2019automatic" class="bibtex noshow">
-<td colspan="6"><b>BibTeX</b>:
-<pre>
-	@article{sun2019automatic,
-		title={Automatic Testing and Improvement of Machine Translation},
-		author={Sun, Zeyu and Zhang, Jie M and Harman, Mark and Papadakis, Mike and Zhang, Lu},
-		journal={arXiv preprint arXiv:1910.02688},
-		year={2019}
-	  }
-</pre></td>
-</tr> 
 
 <tr id="di2020assessing" class="entry">
 	<td>Sergio Di Martino, Filomena Ferrucci, Carmine Gravino, Federica Sarro</td>
-	<td>Assessing the Effectiveness of Approximate Functional Sizing Approaches for Effort Estimation<p class="infolinks">[<a href="javascript:toggleInfo('di2020assessing','bibtex')">BibTeX</a>]</p></td>
+	<td>Assessing the Effectiveness of Approximate Functional Sizing Approaches for Effort Estimation<p class="infolinks">[<a href="javascript:toggleInfo('di2020assessing','bibtex')">BibTeX</a>] [<a href="https://www.sciencedirect.com/science/article/abs/pii/S0950584920300604">URL</a>]</p></td>
 	<td>2020</td>
 	<td>Journal of Information and Software Technology (IST)&nbsp;</td>
-	<td>&nbsp;</td>
+	<!--<td>&nbsp;</td>-->
 </tr>
 <tr id="bib_di2020assessing" class="bibtex noshow">
 <td colspan="6"><b>BibTeX</b>:
@@ -618,12 +581,54 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 </pre></td>
 </tr>
 
+
+<tr id="zhang2019machine" class="entry">
+	<td>Jie M. Zhang, Mark Harman, Lei Ma, Yang Liu</td>
+	<td>Machine Learning Testing: Survey, Landscapes and Horizons<p class="infolinks">[<a href="javascript:toggleInfo('zhang2019machine','bibtex')">BibTeX</a>] [<a href="https://arxiv.org/abs/1906.10742">URL</a>] [<a href="/pdf/zhang2019machine.pdf" download>
+	  PDF</a>]</p></td>
+	<td>2020</td>
+	<td>IEEE Transactions on Software Engineering</td>
+	<!-- <td><a href="https://arxiv.org/abs/1906.10742">URL</a>&nbsp;</td> -->
+</tr>
+<tr id="bib_zhang2019machine" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@article{zhang2019machine,
+		title={Machine learning testing: Survey, landscapes and horizons},
+		author={Zhang, Jie M and Harman, Mark and Ma, Lei and Liu, Yang},
+		journal={arXiv preprint arXiv:1906.10742},
+		year={2019}
+	  }
+</pre></td>
+</tr> 
+
+<tr id="sun2019automatic" class="entry">
+	<td>Jie M. Zhang, Zeyu Sun, Mark Harman, Mike Papadakis, Lu Zhang</td>
+	<td>Automatic Testing and Improvement of Machine Translation<p class="infolinks">[<a href="javascript:toggleInfo('sun2019automatic','bibtex')">BibTeX</a>] [<a href="https://arxiv.org/abs/1910.02688">URL</a>] [<a href="/pdf/sun2019automatic.pdf" download>
+		PDF</a>]</p></td>
+	<td>2020</td>
+	<td>42nd International Conference on Software Engineering (ICSE 2020)</td>
+	<!--<td><a href="https://arxiv.org/abs/1910.02688">URL</a>&nbsp;</td> -->
+</tr>
+<tr id="bib_sun2019automatic" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@article{sun2019automatic,
+		title={Automatic Testing and Improvement of Machine Translation},
+		author={Sun, Zeyu and Zhang, Jie M and Harman, Mark and Papadakis, Mike and Zhang, Lu},
+		journal={arXiv preprint arXiv:1910.02688},
+		year={2019}
+	  }
+</pre></td>
+</tr> 
+
 <tr id="sarro2019search" class="entry">
 	<td>F. Sarro</td>
-	<td>Search-Based Predictive Modelling for Software Engineering: How Far Have We Gone? <p class="infolinks">[<a href="javascript:toggleInfo('sarro2019search','bibtex')">BibTeX</a>]</p></td>
+	<td>Search-Based Predictive Modelling for Software Engineering: How Far Have We Gone? <p class="infolinks">[<a href="javascript:toggleInfo('sarro2019search','bibtex')">BibTeX</a>] [<a href="https://link.springer.com/chapter/10.1007/978-3-030-27455-9_1">URL</a>] [<a href="/pdf/sarro2019search.pdf" download>
+		PDF</a>]</p></td>
 	<td>2019</td>
 	<td>Proceedings of the 11th International Symposium on Search Based Software Engineering</td>
-	<td><a href="https://link.springer.com/chapter/10.1007/978-3-030-27455-9_1">URL</a>&nbsp;</td>
+	<!--<td><a href="https://link.springer.com/chapter/10.1007/978-3-030-27455-9_1">URL</a>&nbsp;</td>-->
 </tr>
 <tr id="bib_sarro2019search" class="bibtex noshow">
 <td colspan="6"><b>BibTeX</b>:
@@ -640,10 +645,11 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 </tr> 
 <tr id="colanzi2019review" class="entry">
 	<td>Colanzi. T. E., Assunção. W. K. G., Farah. P. R., Vergilio. S. R., Guizzo, G.</td>
-	<td>A Review of Ten Years of the Symposium on Search-Based Software Engineering <p class="infolinks">[<a href="javascript:toggleInfo('colanzi2019review','bibtex')">BibTeX</a>]</p></td>
+	<td>A Review of Ten Years of the Symposium on Search-Based Software Engineering <p class="infolinks">[<a href="javascript:toggleInfo('colanzi2019review','bibtex')">BibTeX</a>] [<a href="https://link.springer.com/chapter/10.1007/978-3-030-27455-9_4">URL</a>] [<a href="/pdf/colanzi2019review.pdf" download>
+		PDF</a>]</p></td>
 	<td>2019</td>
 	<td>Proceedings of the 11th Symposium on Search-Based Software Engineering (SSBSE'19</td>
-	<td><a href="https://link.springer.com/chapter/10.1007/978-3-030-27455-9_4">URL</a>&nbsp;</td>
+	<!--<td><a href="https://link.springer.com/chapter/10.1007/978-3-030-27455-9_4">URL</a>&nbsp;</td>-->
 </tr>
 <tr id="bib_colanzi2019review" class="bibtex noshow">
 <td colspan="6"><b>BibTeX</b>:
@@ -660,10 +666,11 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 </tr>
 <tr id="jimenez2019importance" class="entry">
 	<td>M. Jimenez, R. Rwemalika, M. Papadakis, F. Sarro, Y, Le Traon and M. Harman</td>
-	<td>The Importance of Accounting for Real-World Labelling When Predicting Software Vulnerabilities <p class="infolinks">[<a href="javascript:toggleInfo('jimenez2019importance','bibtex')">BibTeX</a>]</p></td>
+	<td>The Importance of Accounting for Real-World Labelling When Predicting Software Vulnerabilities <p class="infolinks">[<a href="javascript:toggleInfo('jimenez2019importance','bibtex')">BibTeX</a>] [<a href="https://dl.acm.org/doi/abs/10.1145/3338906.3338941">URL</a>]  [<a href="/pdf/jimenez2019importance.pdf" download>
+		PDF</a>]</p></td>
 	<td>2019</td>
 	<td>ACM Distinguished Paper Award Paper at the 24th ACM SIGSOFT International Symposium on the Foundations of Software Engineering</td>
-	<td><a href="https://dl.acm.org/doi/abs/10.1145/3338906.3338941">URL</a>&nbsp;</td>
+	<!-- <td><a href="https://dl.acm.org/doi/abs/10.1145/3338906.3338941">URL</a>&nbsp;</td> -->
 </tr>
 <tr id="bib_jimenez2019importance" class="bibtex noshow">
 <td colspan="6"><b>BibTeX</b>:
@@ -680,10 +687,11 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 
 <tr id="zhang2019study" class="entry">
 	<td>M. Jimenez, R. Rwemalika, M. Papadakis, F. Sarro, Y, Le Traon and M. Harman</td>
-	<td>A Study of Programming Languages and Their Bug Resolution Characteristics<p class="infolinks">[<a href="javascript:toggleInfo('zhang2019study','bibtex')">BibTeX</a>]</p></td>
+	<td>A Study of Programming Languages and Their Bug Resolution Characteristics<p class="infolinks">[<a href="javascript:toggleInfo('zhang2019study','bibtex')">BibTeX</a>] [<a href="https://ieeexplore.ieee.org/abstract/document/8941305">URL</a>] [<a href="/pdf/jimenez2019importance.pdf" download>
+		PDF</a>]</p></td>
 	<td>2019</td>
 	<td>IEEE Transactions on Software Engineering</td>
-	<td><a href="https://ieeexplore.ieee.org/abstract/document/8941305">URL</a>&nbsp;</td>
+	<!--<td><a href="https://ieeexplore.ieee.org/abstract/document/8941305">URL</a>&nbsp;</td>-->
 </tr>
 <tr id="bib_zhang2019study" class="bibtex noshow">
 <td colspan="6"><b>BibTeX</b>:
@@ -700,10 +708,10 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 
 <tr id="zhang2019empirical" class="entry">
 	<td>Jie M Zhang, Lingming Zhang, Dan Hao, Lu Zhang, Mark Harman</td>
-	<td>An Empirical Comparison of Mutant Selection Assessment Metrics<p class="infolinks">[<a href="javascript:toggleInfo('zhang2019empirical','bibtex')">BibTeX</a>]</p></td>
+	<td>An Empirical Comparison of Mutant Selection Assessment Metrics<p class="infolinks">[<a href="javascript:toggleInfo('zhang2019empirical','bibtex')">BibTeX</a>] [<a href="https://ieeexplore.ieee.org/abstract/document/8728935">URL</a>]</p></td>
 	<td>2019</td>
 	<td>IEEE International Conference on Software Testing, Verification and Validation Workshops</td>
-	<td><a href="https://ieeexplore.ieee.org/abstract/document/8728935">URL</a>&nbsp;</td>
+	<!--<td><a href="https://ieeexplore.ieee.org/abstract/document/8728935">URL</a>&nbsp;</td>-->
 </tr>
 <tr id="bib_zhang2019empirical" class="bibtex noshow">
 <td colspan="6"><b>BibTeX</b>:
@@ -721,10 +729,10 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 
 <tr id="zhang2019pseudo" class="entry">
 	<td>Jie M. Zhang, Lingming Zhang, Dan Hao, Meng Wang, Lu Zhang</td>
-	<td>Do Pseudo Test Suites Lead to Inflated Correlation in Measuring Test Effectiveness?<p class="infolinks">[<a href="javascript:toggleInfo('zhang2019pseudo','bibtex')">BibTeX</a>]</p></td>
+	<td>Do Pseudo Test Suites Lead to Inflated Correlation in Measuring Test Effectiveness?<p class="infolinks">[<a href="javascript:toggleInfo('zhang2019pseudo','bibtex')">BibTeX</a>] [<a href="https://ieeexplore.ieee.org/abstract/document/8730176">URL</a>]</p></td>
 	<td>2019</td>
 	<td>12th IEEE Conference on Software Testing, Validation and Verification</td>
-	<td><a href="https://ieeexplore.ieee.org/abstract/document/8730176">URL</a>&nbsp;</td>
+	<!--<td><a href="https://ieeexplore.ieee.org/abstract/document/8730176">URL</a>&nbsp;</td>-->
 </tr>
 <tr id="bib_zhang2019pseudo" class="bibtex noshow">
 <td colspan="6"><b>BibTeX</b>:
@@ -742,10 +750,11 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 
 <tr id="alharbi15" class="entry">
 	<td>N. Alshahwan, A. Ciancone, M. Harman, Y. Jia, K. Mao, A. Marginean, A. Mols, H. Peleg, F. Sarro, I. Zorin</td>
-	<td>Some Challenges for Software Testing Research (Invited Talk Paper)<p class="infolinks">[<a href="javascript:toggleInfo('alharbi15','bibtex')">BibTeX</a>]</p></td>
+	<td>Some Challenges for Software Testing Research (Invited Talk Paper)<p class="infolinks">[<a href="javascript:toggleInfo('alharbi15','bibtex')">BibTeX</a>] [<a href= "http://www0.cs.ucl.ac.uk/staff/F.Sarro/resource/papers/ISSTA2019.pdf">URL</a>] [<a href="/pdf/alharbi15.pdf" download>
+		PDF</a>]</p></td>
 	<td>2019</td>
 	<td>Proceedings of the 28th International Symposium on Software Testing and Analysis, (ISSTA 2019)&nbsp;</td>
-	<td>&nbsp;</td>
+	<!--<td>&nbsp;</td>-->
 </tr>
 <!-- <tr id="bib_alharbi15" class="bibtex noshow">
 <td colspan="6"><b>BibTeX</b>:
