@@ -518,6 +518,20 @@ input, select, textarea {
 				.row.gtr-200.gtr-uniform > * {
 					padding-top: 100px;
 				}
+		.epic-team-h2 {
+			margin-bottom: -2px;
+			align-items: left;
+		}
+
+		.project-h2 {
+			align-content: left;
+			text-align: left;
+			margin-bottom: -12px;
+		}
+		.project-h2-authors {
+			margin-top: 2em;
+			padding-bottom: 4px;
+		}
 
 		@media screen and (max-width: 1680px) {
 
@@ -1586,6 +1600,20 @@ input, select, textarea {
 	width: 147px;
 	text-align: center;	
 }
+.epic-box {
+	height: auto;
+	border: solid 6px #ebebeb !important;
+	padding: 1.5em;
+}
+.project-image {
+	width: 150px;
+}
+
+.ackno-image {
+	width: 200px;
+	border: solid 2px #0087A2 !important;
+}
+
 
 .funding-box {
 	height: 10em;
@@ -1593,10 +1621,25 @@ input, select, textarea {
 	padding: 1.5em;
 }
 .funding-box-h3 {
+	text-align: justify;
 	color: #0087A2;
 }
+
 .funding-box-h3 strong{
 	color: #f06e18;
+}
+
+.epic-box-h3 {
+	text-align: justify;
+	color: #0087A2;
+}
+
+.epic-box-h3 strong {
+	color: #f06e18;
+}
+
+.icon-names {
+	color: #0087A2;
 }
 
 /* Image */
@@ -2479,13 +2522,24 @@ input, select, textarea {
 			95% { right: 400%; }
 			100% { right: 0; }
 		  }
-		  .s-move { animation: slideh linear 25s infinite; }
+		  .s-move { animation: slideh linear 20s infinite; }
 		  .s-move:hover { animation-play-state: paused; }
 
 		#banner h1 {
 			padding-bottom: 0.5em;
 			color:#e5e5e5;
-			font-size: 3em;
+			font-size: 2em;
+		}
+
+
+		#banner p {
+			padding-bottom: 0.5em;
+			color:#e5e5e5;
+			font-size: 1em;
+		}
+
+		#banner p strong{
+			color: #f06e18;
 		}
 
 
