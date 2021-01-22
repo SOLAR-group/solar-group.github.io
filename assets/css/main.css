@@ -551,6 +551,16 @@ input, select, textarea {
 				-moz-animation:spin 10s linear infinite;
 				animation:spin 10s linear infinite; 
 			}
+			.o-logo-xmas {
+				height: 200px;
+				width: auto;
+				margin-bottom: 1em;
+				 margin-left: -0.5em;
+				 margin-right: -0.5em;
+				-webkit-animation:spin 10s linear infinite;
+				-moz-animation:spin 10s linear infinite;
+				animation:spin 10s linear infinite; 
+			}
 
 			.row {
 				display: flex;
@@ -802,13 +812,24 @@ input, select, textarea {
 				width: auto;
 				margin-bottom: 1em;
 			}
-	
+
 			.o-logo-main {
 				height: 200px;
 				width: auto;
 				margin-bottom: 1em;
 				 margin-left: -1em;
 				 margin-right: -1em;
+				-webkit-animation:spin 10s linear infinite;
+				-moz-animation:spin 10s linear infinite;
+				animation:spin 10s linear infinite; 
+			}
+	
+			.o-logo-xmas {
+				height: 200px;
+				width: auto;
+				margin-bottom: 1em;
+				 margin-left: -0.5em;
+				 margin-right: -0.5em;
 				-webkit-animation:spin 10s linear infinite;
 				-moz-animation:spin 10s linear infinite;
 				animation:spin 10s linear infinite; 
@@ -1076,6 +1097,17 @@ input, select, textarea {
 				animation:spin 10s linear infinite; 
 			}
 
+			.o-logo-xmas {
+				height: 200px;
+				width: auto;
+				margin-bottom: 1em;
+				 margin-left: -0.5em;
+				 margin-right: -0.5em;
+				-webkit-animation:spin 10s linear infinite;
+				-moz-animation:spin 10s linear infinite;
+				animation:spin 10s linear infinite; 
+			}
+
 			.row {
 				display: flex;
 				flex-wrap: wrap;
@@ -1332,6 +1364,16 @@ input, select, textarea {
 				margin-bottom: 1em;
 				 margin-left: -1em;
 				 margin-right: -1em;
+				-webkit-animation:spin 10s linear infinite;
+				-moz-animation:spin 10s linear infinite;
+				animation:spin 10s linear infinite; 
+			}
+			.o-logo-xmas {
+				height: 200px;
+				width: auto;
+				margin-bottom: 1em;
+				 margin-left: -0.5em;
+				 margin-right: -0.5em;
 				-webkit-animation:spin 10s linear infinite;
 				-moz-animation:spin 10s linear infinite;
 				animation:spin 10s linear infinite; 
@@ -2151,6 +2193,16 @@ input, select, textarea {
 			margin-bottom: 1em;
 			 margin-left: -1em;
 			 margin-right: -1em;
+			-webkit-animation:spin 10s linear infinite;
+			-moz-animation:spin 10s linear infinite;
+			animation:spin 10s linear infinite; 
+		}
+		.o-logo-xmas {
+			height: 200px;
+			width: auto;
+			margin-bottom: 1em;
+			 margin-left: -0.5em;
+			 margin-right: -0.5em;
 			-webkit-animation:spin 10s linear infinite;
 			-moz-animation:spin 10s linear infinite;
 			animation:spin 10s linear infinite; 
@@ -3041,6 +3093,17 @@ input, select, textarea {
 			-moz-animation:spin 10s linear infinite;
 			animation:spin 10s linear infinite; 
 		}
+
+		.o-logo-xmas {
+			height: 100px;
+			width: auto;
+			margin-bottom: 1em;
+			 margin-left: -0.5em;
+			 margin-right: -0.5em;
+			-webkit-animation:spin 10s linear infinite;
+			-moz-animation:spin 10s linear infinite;
+			animation:spin 10s linear infinite; 
+		}
 	}
 /* Small */
 
@@ -3069,6 +3132,17 @@ input, select, textarea {
 		}
 
 		.o-logo-main {
+			height: 75px;
+			width: auto;
+			margin-bottom: 1em;
+			 margin-left: -0.5em;
+			 margin-right: -0.5em;
+			-webkit-animation:spin 10s linear infinite;
+			-moz-animation:spin 10s linear infinite;
+			animation:spin 10s linear infinite; 
+		}
+
+		.o-logo-xmas {
 			height: 75px;
 			width: auto;
 			margin-bottom: 1em;
