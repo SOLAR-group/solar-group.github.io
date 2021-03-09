@@ -2338,12 +2338,18 @@ input, select, textarea {
 		margin-left: -0.5em;
 		margin-right: -0.28em;
 	}
-
+	.homepage #nav {
+		position: absolute;
+		top: 3em;
+		left: 6%;	
+		width: 85%;
+		cursor: default;
+	  }
 	#nav {
 		position: absolute;
 		top: 3em;
-		left: 15%;
-		width: 70%;
+		left: 10%;	
+		width: 85%;
 		cursor: default;
 	}
 
