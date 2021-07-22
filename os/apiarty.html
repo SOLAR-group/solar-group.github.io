@@ -6,20 +6,13 @@
 -->
 <html>
 	<head>
-		<title>SOLAR UCL - CoGEE</title>
+		<title>SOLAR UCL</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../assets/css/main.css" />
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GE87XRDE39"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-GE87XRDE39');
-</script>
+		<!-- <link rel="icon" type="image/png" href="lfm/favicon.png"> -->
+		<link rel="shortcut icon" type="image/png" href="sentinel/favicon.png">
 	</head>
 	<body class="no-sidebar is-preload" onload = "startTimer()">
 		<div id="page-wrapper">
@@ -30,8 +23,11 @@
 
 						<!-- Logo -->
 					<!--	<div> <img id="logo-join-img" src="images/join-us-logo.png" alt="" /> </div> -->
-							<h1 class = "join-h1"> CoGEE </h1>
-							<h2 class="funding-h2">Multi-objective Software Effort Estimation: A Replication Study</h2> 
+                            <h1 class = "join-h1">Evaluating Automatic Program Repair</h1>
+                            <br>
+                            <h1 class = "join-h1">Capabilities to Repair API Misuses</h1>
+                            
+						<!--	<h2 class="funding-h2">Machine Learning Enhanced Human Expert Effort Estimates</h2> -->
 
 						<!--	<h2 class="join-h2">We are actively looking for talented students who are interested in joining SOLAR as research fellows, PhD students, Master students and undergraduate research assistants. </h2> 
 							<h2 class="join-h2"> If you are interested, send an email to <a href="mailto:f.sarro@ucl.ac.uk"> <u>Dr Federica Sarro</u></a> to include your CV, a statement of your research interests and past experience, starting time and transcripts in your message.</h2>
@@ -87,20 +83,24 @@
 								<section class = "epic-box"> 
 									<!--	<a href="#" class="image featured-funding"><img src="images/pic01.jpg" alt="" /></a> -->
 										<header>
-											<h3 class= "funding-box-h3"> 
-												Replication studies increase our confidence in previous results when the findings are similar each time, and help mature our knowledge by addressing both internal and external validity aspects. However, these studies are still rare in certain software engineering fields.
-
-												In this paper, we replicate and extend a previous study, which denotes the current state-of-the-art for multi-objective software effort estimation, namely <strong>CoGEE</strong>. 
-												We investigate the original research questions with an independent implementation and the inclusion of a more robust baseline (LP4EE), carried out by the first author, who was not involved in the original study.
-												Through this replication, we strengthen both the internal and external validity of the original study. 
-												
-												We also answer two new research questions investigating the effectiveness of <strong>CoGEE</strong> by using four additional evolutionary algorithms (i.e., IBEA, MOCell, NSGA-III, SPEA2) and a well-known Java framework for evolutionary computation, namely JMetal (rather than the previously used R software), which allows us to strengthen the external validity of the original study.
-
-												The results of our replication confirm that: (1) <strong>CoGEE</strong> outperforms both baseline and state-of-the-art benchmarks statistically significantly (p <0.001); (2) <strong>CoGEE</strong>'s multi-objective nature makes it able to reach such a good performance; (3)  <strong>CoGEE</strong>'s estimation errors lie within claimed industrial human-expert-based thresholds. 
-												Moreover, our new results show that the effectiveness of <strong>CoGEE</strong> is generally not limited to nor dependent on the choice of the multi-objective algorithm. Using <strong>CoGEE</strong> with either NSGA-II, NSGA-III, or MOCell produces human competitive results in less than a minute.
-												The JMetal version of <strong>CoGEE</strong> has decreased the running time by over 99.8% with respect to its R counterpart.
-												We have made publicly available the Java code of <strong>CoGEE</strong> to ease its adoption, as well as, the data used in this study in order to allow for future replication and extension of our work.
-											</h3>
+											<h3 class= "funding-box-h3">API misuses are well-known causes of software crashes and security vulnerabilities.
+                        However, their detection and repair is challenging given that the correct usages of (third-party) APIs
+                        might be obscure to the developers of client programs.
+                        This paper presents the first empirical study to assess the ability of existing automated bug repair tools
+                        to repair API misuses, which is a class of bugs previously unexplored. 
+                        Our study examines and compares 14 Java test-suite-based repair tools (11 proposed before 2018,
+                        and three afterwards) on a manually curated benchmark (APIRepBench) consisting of 101 API misuses.
+                        We develop an extensible execution framework (APIARTy) to automatically execute multiple repair tools.
+                        Our results show that the repair tools are able to generate patches for 28% of the API misuses considered.
+                        While the 11 less recent tools are generally fast (the median execution time of the repair attempts is 3.87 minutes
+                        and the mean execution time is 30.79 minutes), the three most recent  are less efficient (i.e., 98% slower) than their predecessors.
+                        The tools generate patches for API misuses that mostly belong to the categories of missing null check,
+                        missing value, missing exception, and missing call. Most of the patches generated by all tools are plausible (65%),
+                        but only few of these patches are semantically correct to human patches (25%).
+                        Our findings suggest that the design of future repair tools should support the localisation of complex bugs,
+                        including different categories of API misuses, handling of timeout issues, and ability to configure large software projects.
+                        Both APIRepBench and APIARTy have been made publicly available for other researchers to evaluate the capabilities
+                        of repair tools on detecting and fixing API misuses.</h3>
 										</header>
 									</section> 
 							</div> 
@@ -113,44 +113,52 @@
 							 <div class="col-12 col-6-medium col-12-small"></div>
 								<!-- <section class = "epic-box"> -->
 								<!--	<a href="#" class="image featured-funding"><img src="images/pic01.jpg" alt="" /></a> -->
-								<div class="col-2">
-									<a href="/os/cogee/tse2021_cogee_preprint.pdf"><img class ="project-image" src="../images/paper.png"> </a>
-									<h4 class="member-names"><a href="https://solar.cs.ucl.ac.uk/pdf/tse2021_cogee_preprint.pdf">Preprint</a></h4>
-									<h4 class="member-names"><a href="https://ieeexplore.ieee.org/document/9440773">Publisher Link</a></h4>
+								<!-- <div class="col-2 off-1-left">
+									<a href="http://www0.cs.ucl.ac.uk/staff/F.Sarro/resource/papers/TSE2020_LFM.pdf"><img class ="project-image" src="../images/paper.png"> </a>
+									<h4 class="member-names"><a href="http://www0.cs.ucl.ac.uk/staff/F.Sarro/resource/papers/TSE2020_LFM.pdf">Prepreint</a></h4>
+									<h4 class="member-names"><a href="https://ieeexplore.ieee.org/abstract/document/9272884">Publisher Link</a></h4>
 								</div>
 								<div class="col-2"> 
-									<a href = "/os/cogee/cogee_additional_results.pdf"><img class ="project-image" src="../images/paper.png"> </a>
-									<h4 class="member-names"> <a href = "/os/cogee/cogee_additional_results.pdf">Additional Results</a></h4>
-								</div>
+									<a href = "https://github.com/SOLAR-group/sentinel" download><img class ="project-image" src="../images/source.png"> </a>
+									 <h4 class="member-names"><a href = "https://github.com/SOLAR-group/sentinel" download>Source Code</a></h4>
+								</div>-->
 								<div class="col-2"> 
-									<a href = "https://figshare.com/s/eeca74f09a7f2271cecf"><img class ="project-image" src="../images/figshare.png"> </a>
-									 <h4 class="member-names"><a href = "https://figshare.com/s/eeca74f09a7f2271cecf" download>Replication Package</a></h4>
-								</div>
-								<div class="col-2"> 
-									<a href = "https://figshare.com/s/eeca74f09a7f2271cecf"><img class ="project-image" src="../images/source.png"> </a>
-									 <h4 class="member-names"><a href = "https://github.com/SOLAR-group/cogee" download>Source Code</a></h4>
-								</div>
-								<div class="col-2"> 
-									<a href = "https://valitawosi.com/cogee/plots.html"><img class ="project-image" src="../images/appendices.png"> </a>
-									<h4 class="member-names"> <a href = "https://valitawosi.com/cogee/plots.html">Plots</a></h4>
-								</div>
+									<a href = "https://solar.cs.ucl.ac.uk/APIARTy/"><img class ="project-image" src="../images/subjects.png"> </a>
+									<h4 class="member-names"> <a href = "https://solar.cs.ucl.ac.uk/APIARTy/">APIARTy</a></h4>
+                </div>
+								
+								<!-- </section> -->
 						</div> 
 
 						<div class="row aln-left">
 								<h2 class ="project-h2-authors">Authors</h2>
 						</div>
-						<div class="row aln-center">
-							
-							<div class="col-3 col-6-medium col-12-small">
+						<div class="row aln-center off-1-left">
+                            
+                            <div class="col-3 col-6-medium col-12-small">
 			
 								<!-- Feature -->
 									<section>
-										<a href="https://www.valitawosi.com" class="image featured"><img src="../images/valiT.jpg" alt="" /></a>
-											<h4 class="member-names" ><a href="https://www.valitawosi.com">Vali Tawosi</a></h4>			
-									<!--  <p>Research Fellow at UCL</p>  -->
+										<a href="https://mkechagia.github.io/" class="image featured"><img src="../images/MariaKechagia.jpg" alt="" /></a>
+											<h4 class="member-names" ><a href="https://mkechagia.github.io/">Maria Kechagia</a></h4>			
+				
 										</section>
 
-							</div>
+                            </div>
+              
+              
+              <div class="col-3 col-6-medium col-12-small">
+			
+								<!-- Feature -->
+									<section>
+										<a href="http://mechtaev.com" class="image featured"><img src="../images/SergeyMechtaev.jpg" alt="" /></a>
+											<h4 class="member-names" ><a href="http://mechtaev.com">Sergey Mechtaev</a></h4>			
+				
+										</section>
+
+                            </div>
+                            
+
 							<div class="col-3 col-6-medium col-12-small">
 
 								<!-- Feature -->
@@ -159,19 +167,7 @@
 									
 									<h4 class="member-names"><a href="http://www0.cs.ucl.ac.uk/staff/F.Sarro/">Federica Sarro</a> </h4>
 
-									<!-- <p>Associate Professor at UCL</p> -->
 								</section>
-
-							</div>
-
-							<div class="col-3 col-6-medium col-12-small">
-
-								<!-- Feature -->
-									<section>
-										<a href="https://alessiopetrozziello.github.io" class="image featured"><img src="../images/alessio.jpg" alt="" /></a>
-											<h4 class="member-names"><a href="https://alessiopetrozziello.github.io">Alessio Petrozziello</a></h4>
-						
-									</section>
 
 							</div>
 							
@@ -180,7 +176,7 @@
 								<!-- Feature -->
 									<section>
 										<a href="http://www0.cs.ucl.ac.uk/staff/M.Harman/" class="image featured"><img src="../images/harman.jpg" alt="" /></a>
-											<h4 class="member-names"><a href="http://www0.cs.ucl.ac.uk/staff/M.Harman/">Mark Harman</a></h4>
+										<h4 class="member-names"><a href="http://www0.cs.ucl.ac.uk/staff/M.Harman/">Mark Harman</a></h4>
 										
 									</section>
 							</div>
@@ -196,20 +192,6 @@
 									<!--	<a href="#" class="image featured-funding"><img src="images/pic01.jpg" alt="" /></a> -->
 
 
-<!-- 							<div class="col-3"> 
-								<img class ="ackno-image" src="../images/microsoft.jpg">
-								<h3 class="">Microsoft</h3>
-							</div>
-				
-							<div class="col-3"> 
-								<img class ="ackno-image" src="../images/capes.jpg">
-								<h3 class="">CAPES</h3>
-							</div>
-
-							<div class="col-3"> 
-								<img class ="ackno-image" src="../images/cnpq.png">
-								<h3 class="">CNPq</h3>
-							</div> -->
 			
 							<div class="col-3"> 
 								<img class ="ackno-image" src="../images/epic.jpg">
@@ -302,9 +284,7 @@
 					<!-- <ul class="links"> -->
 						<div class = "row text-center">
 							<div class = "col-6 col-12-medium off-4-right"> 
-								<p>&copy;SOLAR. Designed by
-									<a href="http://www0.cs.ucl.ac.uk/people/R.Moussa.html"> R. Moussa</a> & <a href="http://www0.cs.ucl.ac.uk/staff/F.Sarro/">F. Sarro</a>
-									built on <a href="http://html5up.net">HTML5 UP</a>. All rights reserved.</p></p> 
+								<p>&copy;SOLAR. Built on <a href="http://html5up.net">HTML5 UP</a>. All rights reserved.</p></p> 
 							</div>
 							<div class = "col-2 col-12-medium visit-stat">
 								<div id="histats_counter">
