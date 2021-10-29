@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!DOCTYPE html>
 <!--[if lt IE 8 ]><html class="ie ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -1723,3 +1724,1350 @@ author = "Cuiyun Gao and Jichuan Zeng and Federica Sarro and David Lo and Irwin 
 </body>
 
 </html>
+=======
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<title>SOLAR UCL</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+
+	<!-- CSS
+   ================================================== -->
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/layout.css">
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=MacRoman">
+<script type="text/javascript">
+
+// QuickSearch script for JabRef HTML export 
+// Version: 3.0
+//
+// Copyright (c) 2006-2011, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+//
+// Features:
+// - intuitive find-as-you-type searching
+//    ~ case insensitive
+//    ~ ignore diacritics (optional)
+//
+// - search with/without Regular Expressions
+// - match BibTeX key
+//
+
+// Search settings
+var searchAbstract = true;	// search in abstract
+var searchReview = true;	// search in review
+
+var noSquiggles = true; 	// ignore diacritics when searching
+var searchRegExp = false; 	// enable RegExp searches
+
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// check for quick search table and searchfield
+	if (!document.getElementById('qs_table')||!document.getElementById('quicksearch')) { return; }
+
+	// load all the rows and sort into arrays
+	loadTableData();
+	
+	//find the query field
+	qsfield = document.getElementById('qs_field');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+	
+	// set up preferences
+	initPreferences();
+
+	// shows the searchfield
+	
+	document.getElementById('qs_field').onkeyup = quickSearch;
+}
+
+function loadTableData() {
+	// find table and appropriate rows
+	searchTable = document.getElementById('qs_table');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array(); infoRows = new Array(); absRows = new Array(); revRows = new Array();
+
+	// get data from each row
+	entryRowsData = new Array(); absRowsData = new Array(); revRowsData = new Array(); 
+	
+	BibTeXKeys = new Array();
+	
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.match(/entry/)) {
+			entryRows[j] = allRows[i];
+			entryRowsData[j] = stripDiacritics(getTextContent(allRows[i]));
+			allRows[i].id ? BibTeXKeys[j] = allRows[i].id : allRows[i].id = 'autokey_'+j;
+			j ++;
+		} else {
+			infoRows[k++] = allRows[i];
+			// check for abstract/review
+			if (allRows[i].className.match(/abstract/)) {
+				absRows.push(allRows[i]);
+				absRowsData[j-1] = stripDiacritics(getTextContent(allRows[i]));
+			} else if (allRows[i].className.match(/review/)) {
+				revRows.push(allRows[i]);
+				revRowsData[j-1] = stripDiacritics(getTextContent(allRows[i]));
+			}
+		}
+	}
+	//number of entries and rows
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+	numAbs = absRows.length;
+	numRev = revRows.length;
+}
+
+function quickSearch(){
+	
+	tInput = qsfield;
+
+	if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		t = stripDiacritics(tInput.value);
+
+		if(!searchRegExp) { t = escapeRegExp(t); }
+			
+		// only search for valid RegExp
+		try {
+			textRegExp = new RegExp(t,"i");
+			closeAllInfo();
+			qsfield.className = '';
+		}
+			catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		if(cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			if (entryRowsData[i].search(textRegExp) != -1 || BibTeXKeys[i].search(textRegExp) != -1){ 
+				found = true;
+			} else {
+				if(searchAbstract && absRowsData[i]!=undefined) {
+					if (absRowsData[i].search(textRegExp) != -1){ found=true; } 
+				}
+				if(searchReview && revRowsData[i]!=undefined) {
+					if (revRowsData[i].search(textRegExp) != -1){ found=true; } 
+				}
+			}
+			
+			if (found){
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+
+// Strip Diacritics from text
+// http://stackoverflow.com/questions/990904/javascript-remove-accents-in-strings
+
+// String containing replacement characters for stripping accents 
+var stripstring = 
+    'AAAAAAACEEEEIIII'+
+    'DNOOOOO.OUUUUY..'+
+    'aaaaaaaceeeeiiii'+
+    'dnooooo.ouuuuy.y'+
+    'AaAaAaCcCcCcCcDd'+
+    'DdEeEeEeEeEeGgGg'+
+    'GgGgHhHhIiIiIiIi'+
+    'IiIiJjKkkLlLlLlL'+
+    'lJlNnNnNnnNnOoOo'+
+    'OoOoRrRrRrSsSsSs'+
+    'SsTtTtTtUuUuUuUu'+
+    'UuUuWwYyYZzZzZz.';
+
+function stripDiacritics(str){
+
+    if(noSquiggles==false){
+        return str;
+    }
+
+    var answer='';
+    for(var i=0;i<str.length;i++){
+        var ch=str[i];
+        var chindex=ch.charCodeAt(0)-192;   // Index of character code in the strip string
+        if(chindex>=0 && chindex<stripstring.length){
+            // Character is within our table, so we can strip the accent...
+            var outch=stripstring.charAt(chindex);
+            // ...unless it was shown as a '.'
+            if(outch!='.')ch=outch;
+        }
+        answer+=ch;
+    }
+    return answer;
+}
+
+// http://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
+// NOTE: must escape every \ in the export code because of the JabRef Export...
+function escapeRegExp(str) {
+  return str.replace(/[-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+}
+
+function toggleInfo(articleid,info) {
+
+	var entry = document.getElementById(articleid);
+	var abs = document.getElementById('abs_'+articleid);
+	var rev = document.getElementById('rev_'+articleid);
+	var bib = document.getElementById('bib_'+articleid);
+	
+	if (abs && info == 'abstract') {
+		abs.className.indexOf('noshow') == -1?abs.className = 'abstract noshow':abs.className = 'abstract show';
+	} else if (rev && info == 'review') {
+		rev.className.indexOf('noshow') == -1?rev.className = 'review noshow':rev.className = 'review show';
+	} else if (bib && info == 'bibtex') {
+		bib.className.indexOf('noshow') == -1?bib.className = 'bibtex noshow':bib.className = 'bibtex show';
+	} else { 
+		return;
+	}
+
+	// check if one or the other is available
+	var revshow; var absshow; var bibshow;
+	(abs && abs.className.indexOf('noshow') == -1)? absshow = true: absshow = false;
+	(rev && rev.className.indexOf('noshow') == -1)? revshow = true: revshow = false;	
+	(bib && bib.className.indexOf('noshow') == -1)? bibshow = true: bibshow = false;
+	
+	// highlight original entry
+	if(entry) {
+		if (revshow || absshow || bibshow) {
+		entry.className = 'entry highlight show';
+		} else {
+		entry.className = 'entry show';
+		}
+	}
+	
+	// When there's a combination of abstract/review/bibtex showing, need to add class for correct styling
+	if(absshow) {
+		(revshow||bibshow)?abs.className = 'abstract nextshow':abs.className = 'abstract';
+	} 
+	if (revshow) {
+		bibshow?rev.className = 'review nextshow': rev.className = 'review';
+	}	
+	
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1 && node.className != "infolinks") { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	closeAllInfo();
+	for (var i = 0; i < numEntries; i++){ entryRows[i].className = 'entry show'; }
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function clearQS() {
+	qsfield.value = '';
+	showAll();
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+
+function updateSetting(obj){
+	var option = obj.id;
+	var checked = obj.value;
+
+	switch(option)
+	 {
+	 case "opt_searchAbs":
+	   searchAbstract=!searchAbstract;
+	   redoQS();
+	   break;
+	 case "opt_searchRev":
+	   searchReview=!searchReview;
+	   redoQS();
+	   break;
+	 case "opt_useRegExp":
+	   searchRegExp=!searchRegExp;
+	   redoQS();
+	   break;
+	 case "opt_noAccents":
+	   noSquiggles=!noSquiggles;
+	   loadTableData();
+	   redoQS();
+	   break;
+	 }
+}
+
+function initPreferences(){
+	if(searchAbstract){document.getElementById("opt_searchAbs").checked = true;}
+	if(searchReview){document.getElementById("opt_searchRev").checked = true;}
+	if(noSquiggles){document.getElementById("opt_noAccents").checked = true;}
+	if(searchRegExp){document.getElementById("opt_useRegExp").checked = true;}
+	
+	if(numAbs==0) {document.getElementById("opt_searchAbs").parentNode.style.display = 'none';}
+	if(numRev==0) {document.getElementById("opt_searchRev").parentNode.style.display = 'none';}
+}
+
+function toggleSettings(){
+	var togglebutton = document.getElementById('showsettings');
+	var settings = document.getElementById('settings');
+	
+	if(settings.className == "hidden"){
+		settings.className = "show";
+		togglebutton.innerText = "close settings";
+		togglebutton.textContent = "close settings";
+	}else{
+		settings.className = "hidden";
+		togglebutton.innerText = "settings...";		
+		togglebutton.textContent = "settings...";
+	}
+}
+
+</script>
+<style type="text/css">
+.table-shape { 
+	background-color: white; 
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-size: 13px; 
+	line-height: 1.2; 
+	padding: 1em; 
+	color: #2E2E2E; 
+	margin: auto 2em; }
+
+form#quicksearch { 
+	width: 100%;
+	border-style: solid; 
+	border-color: gray; 
+	padding: 0.7em 0.5em; 
+	}
+	
+span#searchstat {
+	padding-left: 3em;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-size: 20px; 
+}
+
+form#quicksearch .clear-button {
+	width: 100%;
+	/* margin-left: 15em; */
+}
+
+div#settings { margin-top:0.7em; /* border-bottom: 1px transparent solid; background-color: #efefef; border: 1px grey solid; */ }
+div#settings ul {margin: 0; padding: 0; }
+div#settings li {margin: 0; padding: 0 1em 0 0; display: inline; list-style: none; }
+div#settings li + li { border-left: 2px #efefef solid; padding-left: 0.5em;}
+div#settings input { margin-bottom: 0px;}
+
+div#settings.hidden {display:none;}
+
+#showsettings { border: 1px grey solid; padding: 0 0.5em; float:right; line-height: 1.6em; text-align: right; }
+#showsettings:hover { cursor: pointer; }
+
+.invalidsearch { background-color: rgb(155, 24, 24); }
+input[type="button"] { background-color: #0087A2;}
+
+table { width: 100%; 
+	empty-cells: show; 
+	margin: 1em 0em; 
+	border: solid 6px #878787 !important;
+	}
+th, td { border: 1px gray solid; border-width: 1px 1px; padding: 0.5em; vertical-align: top; text-align: left; }
+th { background-color: #efefef; }
+th {
+	color: #0087A2;
+}
+td + td, th + th { border-left: none; }
+
+td a { color: #f06e18; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+tr.highlight td { background-color: #EFEFEF; border: 2px #878787 solid; font-weight: bold; }
+tr.abstract td, tr.review td, tr.bibtex td { background-color: #EFEFEF; text-align: justify; border: solid 2px #878787 !important; }
+tr.nextshow td { border: solid 3px #878787 !important; }
+
+tr.bibtex pre { width: 100%; overflow: auto; white-space: pre-wrap;}
+p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
+
+@media print {
+	p.infolinks, #qs_settings, #quicksearch, t.bibtex { display: none !important; }
+	tr { page-break-inside: avoid; }
+}
+</style>
+</head>
+
+
+
+
+<body class="no-sidebar is-preload">
+	<div id="page-wrapper">
+
+    
+  	<section id="header">
+		<div class="container-noline">
+
+			<!-- Logo -->
+		   <!--	<div> <img id="logo-join-img" src="images/join-us-logo.png" alt="" /> </div> -->
+					<h1 class = "join-h1"> SOLAR Publications</h1>
+					<br>
+				<!--	<p>Fully funded PhD scholarship available, click <a href="http://www0.cs.ucl.ac.uk/staff/F.Sarro/PhDScholarship.html"> here </a> for more info. </p>
+				-->
+					<logo-sec id = "logo-sec"> 
+					<!-- <a href = "index.html">	<span><img class="s-logo" src="images/s-logo.png"> <img id = "thisImg" class="o-logo" src="images/solar-members-logo.png" alt="img"> <img class="lar-logo" src="images/lar-logo.png"> </span></a> -->
+					<a href = "index.html">	<span><img id = "thisImg" class="o-logo" src="images/publications-logo.png" alt="img"> </span></a> 
+	
+					</logo-sec>
+						<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<!-- <li><a class="icon solid fa-home" href="index.html"><span>SOLAR</span></a></li> --> 
+								<li>
+									<a href="#" class="icon fa-chart-bar"><span>Research</span></a> </li>
+									<li>
+										<a  class="icon solid fa-box-open"href="https://solar.cs.ucl.ac.uk/os.html"><span>Open Science</span></a> </li>	
+											<!--	<ul>
+										<li><a href="#">Software Analytics</a></li>
+										<li><a href="#">Search-Based Software Engineering</a></li>
+										<li><a href="#">Optimization</a></li>
+								-->
+										<!-- <li>
+											<a href="#">Phasellus consequat</a>
+											<ul>
+												<li><a href="#">Magna phasellus</a></li>
+												<li><a href="#">Etiam dolore nisl</a></li>
+												<li><a href="#">Phasellus consequat</a></li>
+											</ul>
+										</li>
+										<li><a href="#">Veroeros feugiat</a></li>  -->
+								<!--	</ul> -->
+								</li>
+								<li><a class="icon solid fa-bookmark" href="#"><span>Publications</span></a></li>
+								<li><a class="icon solid fa-users" href="members.html"><span>Team</span></a></li>
+								<li><a class="icon solid fa-hand-holding-usd" href="funding.html"><span>Funding</span></a></li>
+								<li><a class="icon solid fa-user-plus" href="join-us.html"><span>Join Us!</span></a></li>
+							</ul>
+						</nav>
+
+					</div>
+				</section>
+
+      <!-- latest article
+      ================================================== -->
+
+	  
+ <section id="features">
+	<div class="container">
+	<form action="" id="quicksearch"> 
+		<div class = "row aln-center">
+			<div class = "col-4"> 
+<input class = "search-input" type="text" id="qs_field" autocomplete="off" placeholder="Type to search..." /> </div>
+
+<div class = "col-4 off-1-right"> 
+     <span id="searchstat"> Matching entries: <span id="stat">0</span></span> </div>
+	 <div class = "col-3"> 	
+		<input class = "clear-button" type="button" onclick="clearQS()" value="clear" /></div>
+<!-- <div id="showsettings" onclick="toggleSettings()">settings...</div> -->
+<div id="settings" class="hidden">
+<ul>
+<li><input type="checkbox" class="search_setting" id="opt_searchAbs" onchange="updateSetting(this)"><label for="opt_searchAbs"> include abstract</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_searchRev" onchange="updateSetting(this)"><label for="opt_searchRev"> include review</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_useRegExp" onchange="updateSetting(this)"><label for="opt_useRegExp"> use RegExp</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_noAccents" onchange="updateSetting(this)"><label for="opt_noAccents"> ignore accents</label></li>
+</ul>
+</div> 
+</div> 
+</form>
+
+
+<table id="qs_table" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th></tr></thead>
+<tbody>
+<!-- 	<tr id="KEY" class="entry">
+		<td>AUTHORS</td>
+		<td>TITLE<p class="infolinks"> 
+			[<a href="javascript:toggleInfo('KEY','bibtex')">BibTeX</a>] 
+			[<a href="URL">URL</a>]  
+			[<a href="PDF">PDF</a>]
+		</p>
+		</td>
+		<td>YEAR</td>
+		<td>VENUE</td>
+	</tr>
+	<tr id="bib_KEY" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		
+	</pre></td>
+	</tr>  -->
+
+	<tr id="guizzo_icse_2021" class="entry">
+		<td>G. Guizzo,
+			J. Petke,
+			F. Sarro,
+			M. Harman</td>
+		<td>Enhancing Genetic Improvement of Software with Regression Test Selection<p class="infolinks"> 
+			[<a href="javascript:toggleInfo('bib_guizzo_icse_2021','bibtex')">BibTeX</a>]
+		</p>
+		</td>
+		<td>2021</td>
+		<td>International Conference on Software Engineering (ICSE)</td>
+	</tr>
+	<tr id="bib_guizzo_icse_2021" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@inproceedings{guizzo_icse_2021,
+			author          = {Guizzo, Giovani and Petke, Justyna and Sarro, Federica and Harman, Mark},
+			booktitle       = {Proceedings of the 43rd International Conference on Software Engineering (ICSE)},
+			publisher       = {ACM},
+			title           = {{Enhancing Genetic Improvement of Software with Regression Test Selection}},
+			year            = {2021}
+		}
+	</pre>
+	</td>
+	</tr>
+
+<tr id="brownlee_cec_2020" class="entry">
+		<td>A. E. I. Brownlee,
+			J. Petke,
+			A, F. Rasburn</td>
+		<td>Injecting Shortcuts for Faster Running Java Code<p class="infolinks"> 
+			[<a href="javascript:toggleInfo('brownlee_cec_2020','bibtex')">BibTeX</a>] 
+			[<a href="https://doi.org/10.1109/CEC48606.2020.9185708">URL</a>]
+		</p>
+		</td>
+		<td>2020</td>
+		<td>IEEE Congress on Evolutionary Computation</td>
+	</tr>
+	<tr id="bib_brownlee_cec_2020" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@inproceedings{brownlee_cec_2020,
+			author    = {Alexander E. I. Brownlee and
+						 Justyna Petke and
+						 Anna F. Rasburn},
+			title     = {Injecting Shortcuts for Faster Running Java Code},
+			booktitle = {{IEEE} Congress on Evolutionary Computation, {CEC} 2020, Glasgow,
+						 United Kingdom, July 19-24, 2020},
+			pages     = {1--8},
+			publisher = {{IEEE}},
+			year      = {2020},
+			url       = {https://doi.org/10.1109/CEC48606.2020.9185708},
+			doi       = {10.1109/CEC48606.2020.9185708},
+			timestamp = {Fri, 11 Sep 2020 15:04:20 +0200},
+			biburl    = {https://dblp.org/rec/conf/cec/BrownleePR20.bib},
+			bibsource = {dblp computer science bibliography, https://dblp.org}
+		  }
+	</pre></td>
+	</tr>
+	<tr id="wu_tse2020" class="entry">
+		<td>H. Wu,
+			C. Nie,
+			J. Petke,
+			Y. Jia,
+			M. Harman</td>
+		<td>An Empirical Comparison of Combinatorial Testing, Random Testing and
+			Adaptive Random Testing<p class="infolinks"> 
+			[<a href="javascript:toggleInfo('wu_tse2020','bibtex')">BibTeX</a>] 
+			[<a href="https://doi.org/10.1109/TSE.2018.2852744">URL</a>]
+		</p>
+		</td>
+		<td>2020</td>
+		<td>IEEE Transactions on Software Engineering (TSE)</td>
+	</tr>
+	<tr id="bib_wu_tse2020" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@article{wu_tse2020,
+			author    = {Huayao Wu and
+						 Changhai Nie and
+						 Justyna Petke and
+						 Yue Jia and
+						 Mark Harman},
+			title     = {An Empirical Comparison of Combinatorial Testing, Random Testing and
+						 Adaptive Random Testing},
+			journal   = {{IEEE} Trans. Software Eng.},
+			volume    = {46},
+			number    = {3},
+			pages     = {302--320},
+			year      = {2020},
+			url       = {https://doi.org/10.1109/TSE.2018.2852744},
+			doi       = {10.1109/TSE.2018.2852744},
+			timestamp = {Thu, 09 Apr 2020 01:00:00 +0200},
+			biburl    = {https://dblp.org/rec/journals/tse/WuNPJH20.bib},
+			bibsource = {dblp computer science bibliography, https://dblp.org}
+		  }
+	</pre></td>
+	</tr> 
+
+	
+	<tr id="colanzi_ist2020" class="entry">
+		<td>T. E. Colanzi, W. K. G. Assunção. S. R. Vergilio, P. R. Farah, G. Guizzo</td>
+		<td>The Symposium on Search-Based Software Engineering: Past, Present and Future<p class="infolinks"> 
+			[<a href="javascript:toggleInfo('colanzi_ist2020','bibtex')">BibTeX</a>] 
+			[<a href="https://www.sciencedirect.com/science/article/abs/pii/S0950584919301740">URL</a>]  
+			[<a href="https://bit.ly/Guizzo-IST-2020">PDF</a>]
+		</p>
+		</td>
+		<td>2020</td>
+		<td>Information and Software Technology (IST)</td>
+	</tr>
+	<tr id="bib_colanzi_ist2020" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@article{colanzi_ist2020,
+			title = "The Symposium on Search-Based Software Engineering: Past, Present and Future",
+			journal = "Information and Software Technology",
+			volume = "127",
+			pages = "106372",
+			year = "2020",
+			issn = "0950-5849",
+			doi = "https://doi.org/10.1016/j.infsof.2020.106372",
+			author = "Thelma Elita Colanzi and Wesley K.G. Assunção and Silvia R. Vergilio and Paulo Roberto Farah and Giovani Guizzo"
+		}
+	</pre></td>
+	</tr> 
+
+	
+<tr id="sarro2020learning" class="entry">
+		<td>F. Sarro, R. Moussa, A. Petrozziello, M. Harman</td>
+		<td>Learning From Mistakes: Machine Learning Enhanced Human Expert Effort Estimates<p class="infolinks"> 
+			[<a href="javascript:toggleInfo('sarro2020learning','bibtex')">BibTeX</a>]
+	   [<a href="http://www0.cs.ucl.ac.uk/staff/F.Sarro/resource/papers/TSE2020_LFM.pdf">PDF</a>]
+	   [<a href="https://solar.cs.ucl.ac.uk/os/lfm.html">Project Page</a>]
+		</p>
+		</td>
+		<td>2020</td>
+		<td>IEEE Transactions on Software Engineering (TSE)</td>
+	</tr>
+	<tr id="bib_sarro2020learning" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@article{sarro2020learning,
+			title={Learning From Mistakes: Machine Learning Enhanced Human Expert Effort Estimates},
+			author={Sarro, Federica and Moussa, Rebecca and Petrozziello, Alessio and Harman, Mark},
+			journal={IEEE Transactions on Software Engineering},
+			year={2020},
+			publisher={IEEE}
+		  }
+	</pre></td>
+	</tr> 
+
+<tr id="guizzo_tse2020" class="entry">
+		<td>G. Guizzo, F. Sarro, J. Krinke, S. R. Vergilio</td>
+		<td>Sentinel: A Hyper-Heuristic for the Generation of Mutant Reduction Strategies<p class="infolinks"> 
+			[<a href="javascript:toggleInfo('guizzo_tse2020','bibtex')">BibTeX</a>] 
+			[<a href="https://ieeexplore.ieee.org/document/9117067">URL</a>] 
+			[<a href="http://www0.cs.ucl.ac.uk/staff/F.Sarro/resource/papers/TSE2020_Sentinel.pdf">PDF</a>]
+		[<a href="https://github.com/SOLAR-group/sentinel">Source Code</a>]
+		[<a href="https://solar.cs.ucl.ac.uk/os/sentinel.html">Project Page</a>]
+		</p>
+		</td>
+		<td>2020</td>
+		<td>IEEE Transactions on Software Engineering (TSE)</td>
+	</tr>
+	<tr id="bib_guizzo_tse2020" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@ARTICLE{guizzo_tse2020,
+			author={G. {Guizzo} and F. {Sarro} and J. {Krinke} and S. R. {Vergilio}},
+			journal={IEEE Transactions on Software Engineering}, 
+			title={Sentinel: A Hyper-Heuristic for the Generation of Mutant Reduction Strategies}, 
+			year={2020}
+		}
+	</pre></td>
+	</tr> 
+
+<tr id="Gao_IST2020" class="entry">
+		<td>C. Gao, J. Zeng, F. Sarro, D. Lo, I. King, M. R. Lyu</td>
+		<td>Do users care about ad’s performance costs? Exploring the effects of the performance costs of in-app ads on user experience<p class="infolinks"> 
+[<a href="javascript:toggleInfo('Gao_IST2020','bibtex')">BibTeX</a>] 
+[<a href="https://doi.org/10.1016/j.infsof.2020.106471">URL</a>] 
+[<a href="http://www0.cs.ucl.ac.uk/staff/F.Sarro/resource/papers/IST2020_appAdsPerformance.pdf">PDF</a>]
+		</p>
+		</td>
+		<td>2020</td>
+		<td>Journal of Information and Software Technology (IST)</td>
+	</tr>
+	<tr id="bib_Gao_IST2020" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@article{Gao_IST2020,
+title = "Do users care about ad’s performance costs? Exploring the effects of the performance costs of in-app ads on user experience",
+journal = "Information and Software Technology",
+pages = "106471",
+year = "2020",
+issn = "0950-5849",
+doi = "https://doi.org/10.1016/j.infsof.2020.106471",
+url = "http://www.sciencedirect.com/science/article/pii/S0950584920302160",
+author = "Cuiyun Gao and Jichuan Zeng and Federica Sarro and David Lo and Irwin King and Michael R. Lyu"
+}
+	</pre></td>
+	</tr> 
+
+<tr id="AlSubaihin_ssbse2020" class="entry">
+		<td>A. Al-Subaihin and F. Sarro</td>
+		<td>Exploring The Use of Genetic Algorithm Clustering for Mobile App Categorization<p class="infolinks"> 
+[<a href="javascript:toggleInfo('AlSubaihin_ssbse2020','bibtex')">BibTeX</a>] 
+[<a href="https://link.springer.com/chapter/10.1007/978-3-030-59762-7_13">URL</a>] 
+[<a href="http://www0.cs.ucl.ac.uk/staff/F.Sarro/resource/papers/SSBSE20_GAclustering.pdf">PDF</a>]
+[<a href="https://youtu.be/a0HyCtXOPDo">Video</a>]
+		</p>
+		</td>
+		<td>2020</td>
+		<td>12th Symposium on Search-Based Software Engineering (SSBSE)</td>
+	</tr>
+	<tr id="bib_AlSubaihin_ssbse2020" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@inproceedings{AlSubaihin_ssbse2020,
+			title={Exploring the Use of Genetic Algorithm Clustering for Mobile App Categorisation},
+			author={Al-Subaihin, Afnan A and Sarro, Federica},
+			booktitle={International Symposium on Search Based Software Engineering},
+			pages={181--187},
+			year={2020},
+			organization={Springer}
+		  }
+	</pre></td>
+	</tr> 
+
+<tr id="Limssbse2020" class="entry">
+		<td>Mingyi Lim, Giovani Guizzo and Justyna Petke</td>
+		<td>Impact of Test Suite Coverage on Overfitting in Genetic Improvement of Software<p class="infolinks"> 
+		[<a href="javascript:toggleInfo('Limssbse2020','bibtex')">BibTeX</a>] 
+		[<a href="https://doi.org/10.1007/978-3-030-59762-7_14">URL</a>] 
+		[<a href="https://bit.ly/Guizzo-SSBSE-2020">PDF</a>]
+		</p>
+		</td>
+		<td>2020</td>
+		<td>Proceedings of the 12th Symposium on Search-Based Software Engineering (SSBSE'20)</td>
+	</tr>
+	<tr id="bib_Limssbse2020" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@inproceedings{limssbse2020,
+			author    = {Mingyi Lim and
+						 Giovani Guizzo and
+						 Justyna Petke},
+			editor    = {Aldeida Aleti and
+						 Annibale Panichella},
+			title     = {Impact of Test Suite Coverage on Overfitting in Genetic Improvement
+						 of Software},
+			booktitle = {Search-Based Software Engineering - 12th International Symposium,
+						 {SSBSE} 2020, Bari, Italy, October 7-8, 2020, Proceedings},
+			series    = {Lecture Notes in Computer Science},
+			volume    = {12420},
+			pages     = {188--203},
+			publisher = {Springer},
+			year      = {2020},
+			url       = {https://doi.org/10.1007/978-3-030-59762-7\_14},
+			doi       = {10.1007/978-3-030-59762-7\_14},
+			timestamp = {Wed, 30 Sep 2020 18:02:38 +0200},
+			biburl    = {https://dblp.org/rec/conf/ssbse/LimGP20.bib},
+			bibsource = {dblp computer science bibliography, https://dblp.org}
+		  }
+	</pre></td>
+	</tr>
+
+	<tr id="blot_icsew_2020b" class="entry">
+		<td>A. Blot,
+			J. Petke</td>
+		<td>Stack-Based Genetic Improvement<p class="infolinks"> 
+			[<a href="javascript:toggleInfo('blot_icsew_2020b','bibtex')">BibTeX</a>] 
+			[<a href="https://doi.org/10.1145/3387940.3392174">URL</a>]  
+		</p>
+		</td>
+		<td>2020</td>
+		<td>Proceedings of the IEEE/ACM 42nd International Conference on Software Engineering Workshops (ICSEW)</td>
+	</tr>
+	<tr id="bib_blot_icsew_2020b" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@inproceedings{blot_icsew_2020b,
+			author    = {Aymeric Blot and
+						 Justyna Petke},
+			title     = {Stack-Based Genetic Improvement},
+			booktitle = {{ICSE} '20: 42nd International Conference on Software Engineering,
+						 Workshops, Seoul, Republic of Korea, 27 June - 19 July, 2020},
+			pages     = {289--290},
+			publisher = {{ACM}},
+			year      = {2020},
+			url       = {https://doi.org/10.1145/3387940.3392174},
+			doi       = {10.1145/3387940.3392174},
+			timestamp = {Fri, 16 Oct 2020 11:06:55 +0200},
+			biburl    = {https://dblp.org/rec/conf/icse/BlotP20a.bib},
+			bibsource = {dblp computer science bibliography, https://dblp.org}
+		  }
+	</pre></td>
+	</tr>
+
+	<tr id="blot_icsew_2020" class="entry">
+		<td>A. Blot,
+			J. Petke</td>
+		<td>Synthetic Benchmarks for Genetic Improvement<p class="infolinks"> 
+			[<a href="javascript:toggleInfo('blot_icsew_2020','bibtex')">BibTeX</a>] 
+			[<a href="https://doi.org/10.1145/3387940.3392175">URL</a>]  
+		</p>
+		</td>
+		<td>2020</td>
+		<td>Proceedings of the IEEE/ACM 42nd International Conference on Software Engineering Workshops (ICSEW)</td>
+	</tr>
+	<tr id="bib_blot_icsew_2020" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@inproceedings{blot_icsew_2020,
+			author    = {Aymeric Blot and
+						 Justyna Petke},
+			title     = {Synthetic Benchmarks for Genetic Improvement},
+			booktitle = {{ICSE} '20: 42nd International Conference on Software Engineering,
+						 Workshops, Seoul, Republic of Korea, 27 June - 19 July, 2020},
+			pages     = {287--288},
+			publisher = {{ACM}},
+			year      = {2020},
+			url       = {https://doi.org/10.1145/3387940.3392175},
+			doi       = {10.1145/3387940.3392175},
+			timestamp = {Fri, 16 Oct 2020 11:06:55 +0200},
+			biburl    = {https://dblp.org/rec/conf/icse/BlotP20.bib},
+			bibsource = {dblp computer science bibliography, https://dblp.org}
+		  }
+	</pre></td>
+	</tr>
+
+	<tr id="petke_icsew_2020" class="entry">
+		<td>J. Petke,
+			A. Blot</td>
+		<td>Refining Fitness Functions in Test-Based Program Repair<p class="infolinks"> 
+			[<a href="javascript:toggleInfo('petke_icsew_2020','bibtex')">BibTeX</a>] 
+			[<a href="https://doi.org/10.1145/3387940.3392180">URL</a>]
+		</p>
+		</td>
+		<td>2020</td>
+		<td>Proceedings of the IEEE/ACM 42nd International Conference on Software Engineering Workshops (ICSEW)</td>
+	</tr>
+	<tr id="bib_petke_icsew_2020" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@inproceedings{petke_icsew_2020,
+			author    = {Justyna Petke and
+						 Aymeric Blot},
+			title     = {Refining Fitness Functions in Test-Based Program Repair},
+			booktitle = {{ICSE} '20: 42nd International Conference on Software Engineering,
+						 Workshops, Seoul, Republic of Korea, 27 June - 19 July, 2020},
+			pages     = {13--14},
+			publisher = {{ACM}},
+			year      = {2020},
+			url       = {https://doi.org/10.1145/3387940.3392180},
+			doi       = {10.1145/3387940.3392180},
+			timestamp = {Fri, 16 Oct 2020 11:06:55 +0200},
+			biburl    = {https://dblp.org/rec/conf/icse/PetkeB20.bib},
+			bibsource = {dblp computer science bibliography, https://dblp.org}
+		  }
+	</pre></td>
+	</tr>
+
+	<tr id="blot_eurogp_2020" class="entry">
+		<td>A. Blot,
+			J. Petke</td>
+		<td>Comparing Genetic Programming Approaches for Non-functional Genetic
+			Improvement<p class="infolinks"> 
+			[<a href="javascript:toggleInfo('blot_eurogp_2020','bibtex')">BibTeX</a>] 
+			[<a href="https://doi.org/10.1007/978-3-030-44094-7_5">URL</a>]  
+		</p>
+		</td>
+		<td>2020</td>
+		<td>Proceedings of the 23rd European Conference on Genetic Programming (EuroGP)</td>
+	</tr>
+	<tr id="bib_blot_eurogp_2020" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@inproceedings{blot_eurogp_2020,
+			author    = {Aymeric Blot and
+						 Justyna Petke},
+			editor    = {Ting Hu and
+						 Nuno Louren{\c{c}}o and
+						 Eric Medvet and
+						 Federico Divina},
+			title     = {Comparing Genetic Programming Approaches for Non-functional Genetic
+						 Improvement},
+			booktitle = {Genetic Programming - 23rd European Conference, EuroGP 2020, Held
+						 as Part of EvoStar 2020, Seville, Spain, April 15-17, 2020, Proceedings},
+			series    = {Lecture Notes in Computer Science},
+			volume    = {12101},
+			pages     = {68--83},
+			publisher = {Springer},
+			year      = {2020},
+			url       = {https://doi.org/10.1007/978-3-030-44094-7\_5},
+			doi       = {10.1007/978-3-030-44094-7\_5},
+			timestamp = {Mon, 04 May 2020 01:00:00 +0200},
+			biburl    = {https://dblp.org/rec/conf/eurogp/BlotP20.bib},
+			bibsource = {dblp computer science bibliography, https://dblp.org}
+		  }
+	</pre></td>
+	</tr>
+
+	
+
+
+	
+	<tr id="guizzoFSE2020" class="entry">
+		<td>G. Guizzo, F. Sarro, M. Harman</td>
+		<td>Cost Measures Matter for Mutation Testing Study Validity<p class="infolinks"> 
+			[<a href="javascript:toggleInfo('guizzoFSE2020','bibtex')">BibTeX</a>] 
+			[<a href="https://ieeexplore.ieee.org/document/9117067">URL</a>] 
+			[<a href="http://www0.cs.ucl.ac.uk/staff/F.Sarro/resource/papers/FSE2020Guizzo.pdf"> PDF</a>]
+[<a href="https://rdr.ucl.ac.uk/articles/Replication_package_for_Cost_Measures_Matter_for_Mutation_Testing_Study_Validity_accepted_at_FSE_2020/11927208">Replication Package</a>]
+		</p>
+		</td>
+		<td>2020</td>
+		<td>Proceedings of the ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE’20)</td>
+	</tr>
+	<tr id="bib_guizzoFSE2020" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@inproceedings{guizzoFSE2020,
+			title={Cost Measures Matter for Mutation Testing Study Validity},
+			author={G. {Guizzo} and F. {Sarro} and M. {Harman}},
+			booktitle={Proceedings of the ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE’20)},
+			year={2020}
+		}
+	</pre></td>
+	</tr> 
+	
+	<tr id="zhao2020fruiter" class="entry">
+		<td>Y. Zhao, J. Chen, A. Sejfia, M. S. Laser, J. M. Zhang, F. Sarro, M. Harman, N. Medvidović</td>
+		<td>FrUITeR - A Framework for Evaluating UI Test Reuse<p class="infolinks">
+[<a href="javascript:toggleInfo('zhao2020fruiter','bibtex')">BibTeX</a>]
+[<a href="https://felicitia.github.io/FrUITeR/">Replication Package</a>]
+[<a href="http://www0.cs.ucl.ac.uk/staff/F.Sarro/resource/papers/FSE2020-FrUITeR.pdf">PDF</a>]
+<!-- [<a href="" > PDF</a>]</p> -->
+		</td>
+		<td>2020</td>
+		<td>Proceedings of the ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE’20)</td>
+	</tr>
+	<tr id="bib_zhao2020fruiter" class="bibtex noshow">
+	<td colspan="6"><b>BibTeX</b>:
+	<pre>
+		@inproceedings{zhao2020fruiter,
+			title={FrUITeR - A Framework for Evaluating UI Test Reuse},
+			author={Y. Zhao, J. Chen, A. Sejfia, M. S. Laser, J. M. Zhang, F. Sarro, M. Harman, N. Medvidović},
+			booktitle={Proceedings of 28th ACM Symposium on the Foundations of Software Engineering},
+			year={2020}
+		}
+	</pre></td>
+	</tr>
+
+	<tr id="hort2020optimising" class="entry">
+	<td>M. Hort, F.Sarro</td>
+	<td>Optimising Word Embeddings With Search-Based Approaches <p class="infolinks">[<a href="javascript:toggleInfo('hort2020optimising','bibtex')">BibTeX</a>][<a href="http://www0.cs.ucl.ac.uk/staff/fsarro/resource/papers/GECCO20_OptimisingWordEmbeddings.pdf">PDF</a>]
+	[<a href="http://www0.cs.ucl.ac.uk/staff/F.Sarro/resource/papers/GECCO20_OptimisingWordEmbeddings.pdf">PDF</a>]
+	[<a href="https://youtu.be/xNR26K45iqQ">Video</a>] 	</p>
+</td>
+	<td>2020</td>
+	<td>Genetic and Evolutionary Computation Conference Companion (GECCO’20 Companion)</td>
+	<!--<td>&nbsp;</td> -->
+</tr>
+<tr id="bib_hort2020optimising" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@inproceedings{hort2020optimising,
+  title={Optimising word embeddings with search-based approaches},
+  author={Hort, Max and Sarro, Federica},
+  booktitle={Proceedings of the 2020 Genetic and Evolutionary Computation Conference Companion},
+  pages={269--270},
+  year={2020}
+}
+</pre></td>
+</tr> 
+<tr id="sarro20Anew" class="entry">
+	<td>F. Sarro, A. Petrozziello, D.-Q. He, S. Yoo </td>
+	<td>A New Approach to Distribute MOEA Pareto Front Computation 
+		<p class="infolinks">
+			[<a href="javascript:toggleInfo('sarro20Anew','bibtex')">BibTeX</a>]
+			[<a href="http://www0.cs.ucl.ac.uk/staff/fsarro/resource/papers/GECCO20_MOEA_DPF.pdf">PDF</a>]
+			[<a href="https://youtu.be/6KimGmkUgJE">Video</a>]
+		</p>
+	</td>
+	<td>2020</td>
+	<td>Genetic and Evolutionary Computation Conference Companion (GECCO’20 Companion)</td>
+	<!--<td>&nbsp;</td> -->
+</tr>
+<tr id="bib_sarro20Anew" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@inproceedings{sarro2020new,
+		title={A New Approach to Distribute MOEA Pareto Front Computation},
+		author={Sarro, Federica and Petrozziello, Alessio and He, Dan-Qi and Yoo, Shin},
+		year={2020},
+		organization={Genetic and Evolutionary Computation Conference}
+	  }
+</pre></td>
+</tr> 
+
+<tr id="zhang2019machine" class="entry">
+	<td>Jie M. Zhang, Mark Harman, Lei Ma, Yang Liu</td>
+	<td>Machine Learning Testing: Survey, Landscapes and Horizons<p class="infolinks">[<a href="javascript:toggleInfo('zhang2019machine','bibtex')">BibTeX</a>] [<a href="https://arxiv.org/abs/1906.10742">URL</a>] [<a href="" >
+	  PDF</a>]</p></td>
+	<td>2020</td>
+	<td>IEEE Transactions on Software Engineering (TSE)</td>
+	<!-- <td><a href="https://arxiv.org/abs/1906.10742">URL</a>&nbsp;</td> -->
+</tr>
+<tr id="bib_zhang2019machine" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@article{zhang2019machine,
+		title={Machine learning testing: Survey, landscapes and horizons},
+		author={Zhang, Jie M and Harman, Mark and Ma, Lei and Liu, Yang},
+		journal={arXiv preprint arXiv:1906.10742},
+		year={2020}
+	  }
+</pre></td>
+</tr> 
+
+<tr id="di2020assessing" class="entry">
+	<td>Sergio Di Martino, Filomena Ferrucci, Carmine Gravino, Federica Sarro</td>
+	<td>Assessing the Effectiveness of Approximate Functional Sizing Approaches for Effort Estimation<p class="infolinks">[<a href="javascript:toggleInfo('di2020assessing','bibtex')">BibTeX</a>] [<a href="https://www.sciencedirect.com/science/article/abs/pii/S0950584920300604">URL</a>]</p></td>
+	<td>2020</td>
+	<td>Journal of Information and Software Technology (IST)&nbsp;</td>
+	<!--<td>&nbsp;</td>-->
+</tr>
+<tr id="bib_di2020assessing" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@article{di2020assessing,
+		title={Assessing the Effectiveness of Approximate Functional Sizing Approaches for Effort Estimation},
+		author={Di Martino, Sergio and Ferrucci, Filomena and Gravino, Carmine and Sarro, Federica},
+		journal={Information and Software Technology},
+		pages={106308},
+		year={2020},
+		publisher={Elsevier}
+	  }
+</pre></td>
+</tr>
+
+<tr id="sun2019automatic" class="entry">
+	<td>Jie M. Zhang, Zeyu Sun, Mark Harman, Mike Papadakis, Lu Zhang</td>
+	<td>Automatic Testing and Improvement of Machine Translation<p class="infolinks">[<a href="javascript:toggleInfo('sun2019automatic','bibtex')">BibTeX</a>] [<a href="https://arxiv.org/abs/1910.02688">URL</a>] [<a href="" >
+		PDF</a>]</p></td>
+	<td>2020</td>
+	<td>42nd International Conference on Software Engineering (ICSE 2020)</td>
+	<!--<td><a href="https://arxiv.org/abs/1910.02688">URL</a>&nbsp;</td> -->
+</tr>
+<tr id="bib_sun2019automatic" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@article{sun2019automatic,
+		title={Automatic Testing and Improvement of Machine Translation},
+		author={Sun, Zeyu and Zhang, Jie M and Harman, Mark and Papadakis, Mike and Zhang, Lu},
+		journal={arXiv preprint arXiv:1910.02688},
+		year={2020}
+	  }
+</pre></td>
+</tr> 
+
+<tr id="al2019empirical" class="entry">
+	<td>Al-Subaihin, Afnan and Sarro, Federica and Black, Sue and Capra, Licia</td>
+	<td>Empirical comparison of text-based mobile apps similarity measurement techniques<p class="infolinks">[<a href="javascript:toggleInfo('al2019empirical','bibtex')">BibTeX</a>] 
+		[<a href="http://www0.cs.ucl.ac.uk/staff/F.Sarro/resource/papers/EMSE19_clustering.pdf" > PDF</a>]
+		[<a href="https://youtu.be/iWObmSVtZ-0">Video</a>] 
+	</p></td>
+	<td>2019</td>
+	<td>Empirical Software Engineering</td>
+	<!--<td><a href="https://arxiv.org/abs/1910.02688">URL</a>&nbsp;</td> -->
+</tr>
+<tr id="bib_al2019empirical" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@article{al2019empirical,
+		title={Empirical comparison of text-based mobile apps similarity measurement techniques},
+		author={Al-Subaihin, Afnan and Sarro, Federica and Black, Sue and Capra, Licia},
+		journal={Empirical Software Engineering},
+		volume={24},
+		number={6},
+		pages={3290--3315},
+		year={2019},
+		publisher={Springer}
+	  }
+</pre></td>
+</tr> 
+
+<tr id="kechagia2019effective" class="entry">
+	<td>Maria Kechagia, Xavier Devroey, Annibale Panichella, Georgios Gousios, Arie van Deursen</td>
+	<td>Effective and efficient API misuse detection via exception propagation and search-based testing<p class="infolinks">[<a href="javascript:toggleInfo('kechagia2019effective','bibtex')">BibTeX</a>] [<a href="https://doi.org/10.1145/3293882.3330552">URL</a>] [<a href="" >
+	  PDF</a>]</p></td>
+	<td>2019</td>
+	<td>Proceedings of the 28th ACM SIGSOFT International Symposium on Software Testing and Analysis</td>
+	<!-- <td><a href="https://arxiv.org/abs/1906.10742">URL</a>&nbsp;</td> -->
+</tr>
+<tr id="bib_kechagia2019effective" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@inproceedings{kechagia2019effective,
+		title={Effective and efficient API misuse detection via exception propagation and search-based testing},
+		author={Kechagia, Maria and Devroey, Xavier and Panichella, Annibale and Gousios, Georgios and van Deursen, Arie},
+		booktitle={Proceedings of the 28th ACM SIGSOFT International Symposium on Software Testing and Analysis},
+		pages={192--203},
+		year={2019}
+	  }
+</pre></td>
+</tr> 
+
+<tr id="sarro2019search" class="entry">
+	<td>F. Sarro</td>
+	<td>Search-Based Predictive Modelling for Software Engineering: How Far Have We Gone? <p class="infolinks">[<a href="javascript:toggleInfo('sarro2019search','bibtex')">BibTeX</a>] [<a href="https://link.springer.com/chapter/10.1007/978-3-030-27455-9_1">URL</a>] [<a href="" >
+		PDF</a>]</p></td>
+	<td>2019</td>
+	<td>Proceedings of the 11th International Symposium on Search Based Software Engineering</td>
+	<!--<td><a href="https://link.springer.com/chapter/10.1007/978-3-030-27455-9_1">URL</a>&nbsp;</td>-->
+</tr>
+<tr id="bib_sarro2019search" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@inproceedings{sarro2019search,
+		title={Search-Based Predictive Modelling for Software Engineering: How Far Have We Gone?},
+		author={Sarro, Federica},
+		booktitle={International Symposium on Search Based Software Engineering},
+		pages={3--7},
+		year={2019},
+		organization={Springer}
+	  }
+</pre></td>
+</tr> 
+<tr id="colanzi2019review" class="entry">
+	<td>Colanzi. T. E., Assunção. W. K. G., Farah. P. R., Vergilio. S. R., Guizzo, G.</td>
+	<td>A Review of Ten Years of the Symposium on Search-Based Software Engineering <p class="infolinks">[<a href="javascript:toggleInfo('colanzi2019review','bibtex')">BibTeX</a>] [<a href="https://link.springer.com/chapter/10.1007/978-3-030-27455-9_4">URL</a>] [<a href="" >
+		PDF</a>]</p></td>
+	<td>2019</td>
+	<td>Proceedings of the 11th Symposium on Search-Based Software Engineering (SSBSE'19)</td>
+	<!--<td><a href="https://link.springer.com/chapter/10.1007/978-3-030-27455-9_4">URL</a>&nbsp;</td>-->
+</tr>
+<tr id="bib_colanzi2019review" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@inproceedings{colanzi2019review,
+		title={A Review of Ten Years of the Symposium on Search-Based Software Engineering},
+		author={Colanzi, Thelma Elita and Assun{\c{c}}{\~a}o, Wesley Klewerton Guez and Farah, Paulo Roberto and Vergilio, Silvia Regina and Guizzo, Giovani},
+		booktitle={International Symposium on Search Based Software Engineering},
+		pages={42--57},
+		year={2019},
+		organization={Springer}
+	  }
+</pre></td>
+</tr>
+<tr id="jimenez2019importance" class="entry">
+	<td>M. Jimenez, R. Rwemalika, M. Papadakis, F. Sarro, Y, Le Traon and M. Harman</td>
+	<td>The Importance of Accounting for Real-World Labelling When Predicting Software Vulnerabilities <p class="infolinks">[<a href="javascript:toggleInfo('jimenez2019importance','bibtex')">BibTeX</a>] [<a href="https://dl.acm.org/doi/abs/10.1145/3338906.3338941">URL</a>]  [<a href="" >
+		PDF</a>]</p></td>
+	<td>2019</td>
+	<td>ACM Distinguished Paper Award Paper at the 24th ACM SIGSOFT International Symposium on the Foundations of Software Engineering</td>
+	<!-- <td><a href="https://dl.acm.org/doi/abs/10.1145/3338906.3338941">URL</a>&nbsp;</td> -->
+</tr>
+<tr id="bib_jimenez2019importance" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@inproceedings{jimenez2019importance,
+		title={The importance of accounting for real-world labelling when predicting software vulnerabilities},
+		author={Jimenez, Matthieu and Rwemalika, Renaud and Papadakis, Mike and Sarro, Federica and Le Traon, Yves and Harman, Mark},
+		booktitle={Proceedings of the 2019 27th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering},
+		pages={695--705},
+		year={2019}
+	  }
+</pre></td>
+</tr>
+
+<tr id="zhang2019study" class="entry">
+	<td>J. Zhang, F. Li, D. Hao, M. Wang, H. Tang, L. Zhang, M. Harman</td>
+	<td>A Study of Programming Languages and Their Bug Resolution Characteristics<p class="infolinks">[<a href="javascript:toggleInfo('zhang2019study','bibtex')">BibTeX</a>] [<a href="https://ieeexplore.ieee.org/abstract/document/8941305">URL</a>] </p></td>
+	<td>2019</td>
+	<td>IEEE Transactions on Software Engineering (TSE)</td>
+	<!--<td><a href="https://ieeexplore.ieee.org/abstract/document/8941305">URL</a>&nbsp;</td>-->
+</tr>
+<tr id="bib_zhang2019study" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@article{zhang2019study,
+		title={A Study of Programming Languages and Their Bug Resolution Characteristics},
+		author={Zhang, Jie and Li, Feng and Hao, Dan and Wang, Meng and Tang, Hao and Zhang, Lu and Harman, Mark},
+		journal={IEEE Transactions on Software Engineering},
+		year={2019},
+		publisher={IEEE}
+	  }
+</pre></td>
+</tr>
+
+<tr id="zhang2019empirical" class="entry">
+	<td>Jie M Zhang, Lingming Zhang, Dan Hao, Lu Zhang, Mark Harman</td>
+	<td>An Empirical Comparison of Mutant Selection Assessment Metrics<p class="infolinks">[<a href="javascript:toggleInfo('zhang2019empirical','bibtex')">BibTeX</a>] [<a href="https://ieeexplore.ieee.org/abstract/document/8728935">URL</a>]</p></td>
+	<td>2019</td>
+	<td>IEEE International Conference on Software Testing, Verification and Validation Workshops</td>
+	<!--<td><a href="https://ieeexplore.ieee.org/abstract/document/8728935">URL</a>&nbsp;</td>-->
+</tr>
+<tr id="bib_zhang2019empirical" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@inproceedings{zhang2019empirical,
+		title={An Empirical Comparison of Mutant Selection Assessment Metrics},
+		author={Zhang, Jie M and Zhang, Lingming and Hao, Dan and Zhang, Lu and Harman, Mark},
+		booktitle={2019 IEEE International Conference on Software Testing, Verification and Validation Workshops (ICSTW)},
+		pages={90--101},
+		year={2019},
+		organization={IEEE}
+	  }
+</pre></td>
+</tr>
+
+<tr id="zhang2019pseudo" class="entry">
+	<td>Jie M. Zhang, Lingming Zhang, Dan Hao, Meng Wang, Lu Zhang</td>
+	<td>Do Pseudo Test Suites Lead to Inflated Correlation in Measuring Test Effectiveness?<p class="infolinks">[<a href="javascript:toggleInfo('zhang2019pseudo','bibtex')">BibTeX</a>] [<a href="https://ieeexplore.ieee.org/abstract/document/8730176">URL</a>]</p></td>
+	<td>2019</td>
+	<td>12th IEEE Conference on Software Testing, Validation and Verification</td>
+	<!--<td><a href="https://ieeexplore.ieee.org/abstract/document/8730176">URL</a>&nbsp;</td>-->
+</tr>
+<tr id="bib_zhang2019pseudo" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@inproceedings{zhang2019pseudo,
+		title={Do Pseudo Test Suites Lead to Inflated Correlation in Measuring Test Effectiveness?},
+		author={Zhang, Jie M and Zhang, Lingming and Hao, Dan and Wang, Meng and Zhang, Lu},
+		booktitle={2019 12th IEEE Conference on Software Testing, Validation and Verification (ICST)},
+		pages={252--263},
+		year={2019},
+		organization={IEEE}
+	  }
+</pre></td>
+</tr>
+
+<tr id="alharbi15" class="entry">
+	<td>N. Alshahwan, A. Ciancone, M. Harman, Y. Jia, K. Mao, A. Marginean, A. Mols, H. Peleg, F. Sarro, I. Zorin</td>
+	<td>Some Challenges for Software Testing Research (Invited Talk Paper)<p class="infolinks">[<a href="javascript:toggleInfo('alshahwan2019some','bibtex')">BibTeX</a>] [<a href= "http://www0.cs.ucl.ac.uk/staff/F.Sarro/resource/papers/ISSTA2019.pdf">URL</a>] [<a href="" >
+		PDF</a>]</p></td>
+	<td>2019</td>
+	<td>Proceedings of the 28th International Symposium on Software Testing and Analysis, (ISSTA 2019)&nbsp;</td>
+	<!--<td>&nbsp;</td>-->
+</tr>
+<tr id="bib_alshahwan2019some" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+	@inproceedings{alshahwan2019some,
+		title={Some challenges for software testing research (invited talk paper)},
+		author={Alshahwan, Nadia and Ciancone, Andrea and Harman, Mark and Jia, Yue and Mao, Ke and Marginean, Alexandru and Mols, Alexander and Peleg, Hila and Sarro, Federica and Zorin, Ilya},
+		booktitle={Proceedings of the 28th ACM SIGSOFT International Symposium on Software Testing and Analysis},
+		pages={1--3},
+		year={2019}
+	  }
+</pre></td>
+</tr>
+
+</tbody>
+</table>
+	  </div>
+	  </section>
+
+	  <div id="copyright" class="container">
+		<!-- <ul class="links"> -->
+			<div class = "row text-center">
+				<div class = "col-6 col-12-medium off-4-right"> 
+					<p>&copy;SOLAR. Built on <a href="http://html5up.net">HTML5 UP</a>. All rights reserved.</p></p> 
+				</div>
+				<div class = "col-2 col-12-medium visit-stat">
+					<div id="histats_counter">
+					<!-- Histats.com  START  (aync)-->
+					<script type="text/javascript">var _Hasync= _Hasync|| [];
+					_Hasync.push(['Histats.start', '1,4399459,4,601,110,30,00011000']);
+					_Hasync.push(['Histats.fasi', '1']);
+					_Hasync.push(['Histats.track_hits', '']);
+					(function() {
+					var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+					hs.src = ('//s10.histats.com/js15_as.js');
+					(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+					})();</script>
+					</div>
+				</div>
+				
+			</div>
+			<!-- <li>Design: <a href="http://html5up.net">HTML5 UP</a></li> -->
+		<!-- </ul> -->
+	</div>
+     </div> <!-- end content-wrap -->     
+
+
+   </div>
+   <!-- Java Script
+   ================================================== -->
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script src="js/custom.js"></script>
+   <script src="assets/js/jquery.min.js"></script>
+   <script src="assets/js/jquery.dropotron.min.js"></script>
+   <script src="assets/js/browser.min.js"></script>
+   <script src="assets/js/breakpoints.min.js"></script>
+   <script src="assets/js/util.js"></script>
+   <script src="assets/js/main.js"></script>
+
+
+</body>
+
+</html>
+>>>>>>> Stashed changes
