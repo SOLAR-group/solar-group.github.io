@@ -21,20 +21,20 @@ function startTimer() {
 }
 var iconImages = [], y = -1;  
 var images = [], x = -1; 
-// images[0] = "images/solar-logo-13.png"
-// images[1] ="images/solar-logo-6.png";
-// images[2] ="images/solar-logo-12.png";
-// images[3] ="images/solar-logo-4.png";
-// images[4] ="images/solar-logo-1.png";
-// images[5] ="images/solar-logo-22.png";
-// images[6] ="images/solar-logo-32.png";
-// images[7] ="images/solar-logo-7.png";
-// images[8] ="images/solar-logo-5.png";
-// images[9] ="images/solar-logo-4.png";
-// images[10] ="images/solar-logo-9.png";
-// images[11] ="images/solar-logo-8.png";
-// images[12] ="images/solar-logo-32.png";
-// images[13] ="images/solar-logo-11.png";
+images[0] = "images/solar-logo-13.png"
+images[1] ="images/solar-logo-6.png";
+images[2] ="images/solar-logo-12.png";
+images[3] ="images/solar-logo-4.png";
+images[4] ="images/solar-logo-1.png";
+images[5] ="images/solar-logo-22.png";
+images[6] ="images/solar-logo-32.png";
+images[7] ="images/solar-logo-7.png";
+images[8] ="images/solar-logo-5.png";
+images[9] ="images/solar-logo-4.png";
+images[10] ="images/solar-logo-9.png";
+images[11] ="images/solar-logo-8.png";
+images[12] ="images/solar-logo-32.png";
+images[13] ="images/solar-logo-11.png";
 
 // images[0] = "images/O-logo-xmas-1.png"
 // images[1] ="images/O-logo-xmas-2.png";
@@ -44,10 +44,10 @@ var images = [], x = -1;
 // images[5] ="images/solar-logo-22.png";
 // images[6] ="images/solar-logo-32.png";
 
-images[0] = "images/halloween-2.png"
-images[1] ="images/halloween-3.png";
-images[2] ="images/halloween-4.png";
-images[3] ="images/halloween-logo.png";
+// images[0] = "images/halloween-2.png"
+// images[1] ="images/halloween-3.png";
+// images[2] ="images/halloween-4.png";
+// images[3] ="images/halloween-logo.png";
 
 
 
