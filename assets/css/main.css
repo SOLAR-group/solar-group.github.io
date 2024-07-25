@@ -2505,6 +2505,51 @@ input, select, textarea {
 			margin-top: 1.25em;
 		}
 
+/* Awards */
+	
+	#awards {
+		text-align: left;
+		background: #fff;
+	}
+
+	#awards .year {
+		font-size: 2em;
+		font-weight: 800;
+	}
+
+	#awards .award {
+		background-color: #ddd;
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+		border-radius: 1em;
+		padding: 1.1em;
+		margin: 1.1em;
+
+	}
+
+	#awards .award-title {
+		color:#f06e18;
+		font-weight: 500;
+		font-size: 1.6em;
+	}
+	
+	#awards .paper-title {
+		font-weight: 500;
+		font-style: italic;
+		font-size: 1.4em;
+	}
+	
+	#awards .recipients {
+		font-size: 1.2em;
+	}
+	
+	#awards .award-button {
+		background: #f06e18;
+		color:#fff;
+		font-size: 1em;
+		padding: 2px 10px;
+		border-radius: 1em;
+	}
+
 
 /* Banner */
 
