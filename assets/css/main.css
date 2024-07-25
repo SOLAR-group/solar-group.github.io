@@ -2517,13 +2517,17 @@ input, select, textarea {
 		font-weight: 800;
 	}
 
+	#awards .award-type {
+		color: #f06e18;
+		font-weight: 400;
+	}
+
 	#awards .award {
-		background-color: #ddd;
+		background-color: #fff;
 		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 		border-radius: 1em;
 		padding: 1.1em;
 		margin: 1.1em;
-
 	}
 
 	#awards .award-title {
