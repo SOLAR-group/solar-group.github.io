@@ -2534,6 +2534,11 @@ input, select, textarea {
 		background-color: #fef9e1;
 	}
 
+	#awards .special-award-desc {
+		font-size: 1.2em;
+		font-weight: 400;
+	}
+
 	#awards .award-title {
 		color:#f06e18;
 		font-weight: 500;
