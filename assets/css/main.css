@@ -2530,6 +2530,10 @@ input, select, textarea {
 		margin: 1.1em;
 	}
 
+	#awards .award.special {
+		background-color: #fef9e1;
+	}
+
 	#awards .award-title {
 		color:#f06e18;
 		font-weight: 500;
