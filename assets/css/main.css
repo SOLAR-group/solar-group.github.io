@@ -1738,6 +1738,10 @@ input, select, textarea {
 				margin: 0 auto;
 				width: auto;
 			}
+		
+	.member-photo {
+		object-fit: cover;
+	}
 
 /* List */
 
